@@ -1,0 +1,65 @@
+<?php
+    
+    namespace App\Http\Controllers;
+    
+    use App\Http\Requests\ProductUserReviewFormRequest;
+    use App\Models\ProductUserReview;
+    use Illuminate\Contracts\View\View;
+    use Illuminate\Database\QueryException;
+    use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\DB;
+    use Illuminate\Support\Facades\Log;
+    
+    class ProductUserReviewController extends Controller {
+        
+        public function index (): View {
+            $data[ 'title' ]   = 'Products Reviews';
+            $data[ 'reviews' ] = ProductUserReview ::with ( [ 'product', 'user' ] ) -> latest () -> get ();
+            return view ( 'products.reviews', $data );
+        }
+        
+        public function create () {
+            //
+        }
+        
+        public function store ( ProductUserReviewFormRequest $request ) {
+            //
+        }
+        
+        public function edit ( ProductUserReview $review ) {
+            //
+        }
+        
+        public function update ( ProductUserReviewFormRequest $request, ProductUserReview $review ) {
+            try {
+                DB ::beginTransaction ();
+                $review -> active = $review -> active == '0' ? '1' : '0';
+                $review -> update ();
+                DB ::commit ();
+                
+                return redirect () -> back () -> with ( 'message', 'Review has been updated.' );
+                
+            }
+            catch ( QueryException | \Exception $exception ) {
+                DB ::rollBack ();
+                Log ::error ( $exception );
+                return redirect () -> back () -> with ( 'error', $exception -> getMessage () ) -> withInput ();
+            }
+        }
+        
+        public function destroy ( ProductUserReview $review ) {
+            try {
+                DB ::beginTransaction ();
+                $review -> delete ();
+                DB ::commit ();
+                
+                return redirect () -> back () -> with ( 'message', 'Review has been deleted.' );
+                
+            }
+            catch ( QueryException | \Exception $exception ) {
+                DB ::rollBack ();
+                Log ::error ( $exception );
+                return redirect () -> back () -> with ( 'error', $exception -> getMessage () ) -> withInput ();
+            }
+        }
+    }
