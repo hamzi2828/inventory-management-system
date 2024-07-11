@@ -61,15 +61,11 @@
                                         </div>
                                     </div>
 {{--                                    <button class="btn btn-primary w-100" tabindex="4">Sign in</button>--}}
-                                    {{-- <button class="btn btn-primary w-100 g-recaptcha"
+                                    <button class="btn btn-primary w-100 g-recaptcha"
                                             data-sitekey="6LcPV_IpAAAAAC55848kihvlcqe5y9aN0z77eGMI"
                                             data-callback='login'
                                             data-action='submit'>Submit
-                                    </button> --}}
-                                    <button class="btn btn-primary w-100 "
-                                    data-callback='login'
-                                    data-action='submit'>Submit
-                            </button>
+                                    </button>
                                 </form>
                             </div>
                         </div>

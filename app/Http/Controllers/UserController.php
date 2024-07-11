@@ -163,6 +163,13 @@
             return redirect () -> back () -> with ( 'message', 'User has been deleted.' );
         }
         
+        public function status ( User $user ) {
+            $this -> authorize ( 'status', $user );
+            $user -> status = !$user -> status;
+            $user -> update ();
+            return redirect () -> back () -> with ( 'message', 'User status has been updated.' );
+        }
+        
         public function theme () {
             try {
                 DB ::beginTransaction ();

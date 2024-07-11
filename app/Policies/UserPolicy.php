@@ -110,6 +110,13 @@
                 return false;
         }
 
+        public function status ( User $user, User $model ) {
+            if ( in_array ( 'status-users-privilege', $user -> permissions () ) )
+                return true;
+            else
+                return false;
+        }
+
         /**
          * --------------
          * Determine whether the user can restore the model.

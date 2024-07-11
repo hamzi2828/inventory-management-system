@@ -38,6 +38,12 @@
                        value="delete-users-privilege" @checked(!empty($permission) && in_array ('delete-users-privilege', $permission -> permission))>
                 <label class="form-check-label">Delete Users</label>
             </div>
+
+            <div class="form-check form-check-success">
+                <input type="checkbox" class="form-check-input" name="privilege[]"
+                       value="status-users-privilege" @checked(!empty($permission) && in_array ('status-users-privilege', $permission -> permission))>
+                <label class="form-check-label">Active/Inactive Users</label>
+            </div>
         </div>
     </td>
 </tr>

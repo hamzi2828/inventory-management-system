@@ -72,6 +72,44 @@
                                                         </select>
                                                     </div>
                                                     
+                                                    <div class="col-md-3 mb-1">
+                                                        <label class="col-form-label font-small-4"
+                                                               for="display-out-of-stock-products">
+                                                            Display Out-of-Stock Products
+                                                        </label>
+                                                        <select name="display-out-of-stock-products"
+                                                                class="form-control select2"
+                                                                data-placeholder="Select" required="required"
+                                                                id="display-out-of-stock-products">
+                                                            <option></option>
+                                                            <option value="1" @selected(optional ($settings -> settings) -> display_out_of_stock_products === '1')>
+                                                                Yes
+                                                            </option>
+                                                            <option value="0" @selected(optional ($settings -> settings) -> display_out_of_stock_products === '0')>
+                                                                No
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-3 mb-1">
+                                                        <label class="col-form-label font-small-4"
+                                                               for="display-top-categories">
+                                                            Display Top Categories
+                                                        </label>
+                                                        <select name="display-top-categories"
+                                                                class="form-control select2"
+                                                                data-placeholder="Select" required="required"
+                                                                id="display-top-categories">
+                                                            <option></option>
+                                                            <option value="1" @selected(optional ($settings -> settings) -> display_top_categories === '1')>
+                                                                Yes
+                                                            </option>
+                                                            <option value="0" @selected(optional ($settings -> settings) -> display_top_categories === '0')>
+                                                                No
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    
                                                     <div class="col-md-6 mb-1">
                                                         <label class="col-form-label font-small-4">Address</label>
                                                         <textarea name="address" class="form-control"

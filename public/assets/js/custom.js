@@ -1026,7 +1026,11 @@ $ ( document ).on ( 'change', '#flat-discount', function () {
     let discount = $ ( this ).val ();
     let total    = $ ( '#sale-total' ).val ();
     
-    if ( parseFloat ( total ) > 0 && parseFloat ( discount ) > 0 ) {
+    if ( parseFloat ( discount ) > parseFloat ( total ) ) {
+        discount = 0;
+        $ ( '#flat-discount' ).val ( '0' );
+    }
+    else if ( parseFloat ( total ) > 0 && parseFloat ( discount ) > 0 ) {
         $ ( '#sale-discount' ).prop ( 'readonly', true );
         $ ( '#sale-discount' ).prop ( 'required', false );
         let total_sum = total - discount;

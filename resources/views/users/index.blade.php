@@ -52,13 +52,27 @@
                                                     </td>
                                                     <td>{{ $user -> status }}</td>
                                                     <td>
-                                                        <div class="align-content-start d-flex justify-content-start">
+                                                        <div class="align-content-start d-flex justify-content-start flex-column">
                                                             
                                                             @can('edit', \App\Models\User::class)
-                                                                <a class="btn btn-primary btn-sm d-block mb-25 me-25"
+                                                                <a class="btn btn-primary btn-sm d-block mb-25"
                                                                    href="{{ route ('users.edit', ['user' => $user -> id]) }}">
                                                                     Edit
                                                                 </a>
+                                                            @endcan
+                                                            
+                                                            @can('status', $user)
+                                                                @if(auth () -> user () -> id != $user -> id)
+                                                                    <form method="post" class="mb-25"
+                                                                          action="{{ route ('users.status', ['user' => $user -> id]) }}">
+                                                                        @csrf
+                                                                        <button type="button"
+                                                                                onclick="return confirm('Are you sure?')"
+                                                                                class="btn btn-warning btn-sm d-block w-100">
+                                                                            Active/Inactive
+                                                                        </button>
+                                                                    </form>
+                                                                @endif
                                                             @endcan
                                                             
                                                             @can('delete', $user)

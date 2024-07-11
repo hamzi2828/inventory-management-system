@@ -392,4 +392,22 @@
             }
         }
         
+        public function status ( Request $request, Sale $sale ) {
+            $this -> authorize ( 'status', $sale );
+            try {
+                DB ::beginTransaction ();
+                $sale -> status = !$sale -> status;
+                $sale -> update ();
+                DB ::commit ();
+                
+                return redirect () -> back () -> with ( 'message', 'Sale status has been updated.' );
+                
+            }
+            catch ( QueryException | \Exception $exception ) {
+                DB ::rollBack ();
+                Log ::error ( $exception );
+                return redirect () -> back () -> with ( 'error', $exception -> getMessage () ) -> withInput ();
+            }
+        }
+        
     }

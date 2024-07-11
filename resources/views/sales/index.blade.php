@@ -95,6 +95,14 @@
                                                             @endif
                                                             
                                                             @if($sale -> sale_closed == '0')
+                                                                @can('status', $sale)
+                                                                    <a class="btn btn-foursquare btn-sm d-block mb-25 me-25"
+                                                                       onclick="return confirm('Are you sure?')"
+                                                                       href="{{ route ('sales.status', ['sale' => $sale -> id]) }}">
+                                                                        {{ $sale -> status == '1' ? 'Deactivate' : 'Activate' }}
+                                                                    </a>
+                                                                @endcan
+                                                                
                                                                 @can('close_bill', $sale)
                                                                     <a class="btn btn-warning btn-sm d-block mb-25 me-25"
                                                                        onclick="return confirm('Are you sure?')"
@@ -139,6 +147,9 @@
                                                             Online
                                                         </span>
                                                         @endif
+                                                        <span class="badge bg-primary">
+                                                            {{ $sale -> status == '1' ? 'Active' : 'Inactive' }}
+                                                        </span>
                                                     </td>
                                                     <td>
                                                         {{ $sale -> sale_id }}

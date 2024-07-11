@@ -47,6 +47,12 @@
 
             <div class="form-check form-check-success">
                 <input type="checkbox" class="form-check-input" name="privilege[]"
+                       value="status-sales-privilege" @checked(!empty($permission) && in_array ('status-sales-privilege', $permission -> permission))>
+                <label class="form-check-label">Active/Inactive sales</label>
+            </div>
+
+            <div class="form-check form-check-success">
+                <input type="checkbox" class="form-check-input" name="privilege[]"
                        value="sale-refund-privilege" @checked(!empty($permission) && in_array ('sale-refund-privilege', $permission -> permission))>
                 <label class="form-check-label">Refund sales</label>
             </div>

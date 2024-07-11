@@ -42,7 +42,7 @@
         
         public function orders_count ( $open = true ) {
             $sale = Sale ::query ();
-            $sale -> where ( [ 'refunded' => '0' ] );
+            $sale -> where ( [ 'refunded' => '0', 'status' => '1' ] );
             
             if ( $open )
                 $sale -> where ( [ 'sale_closed' => '0' ] );

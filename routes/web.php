@@ -140,6 +140,11 @@
             'theme'
         ] );
         
+        Route ::get ( 'users/{user}/status', [
+            UserController::class,
+            'status'
+        ] ) -> name ( 'users.status' );
+        
         Route ::resource ( 'users', UserController::class ) -> except ( [ 'show' ] );
         
         Route ::prefix ( 'settings' ) -> group ( function () {
@@ -566,6 +571,11 @@
             SaleController::class,
             'close_sale'
         ] ) -> name ( 'sales.close-sale' );
+        
+        Route ::get ( '/sale/{sale}/status', [
+            SaleController::class,
+            'status'
+        ] ) -> name ( 'sales.status' );
         
         Route ::get ( '/refund-sale/{sale}', [
             SaleController::class,
