@@ -23,7 +23,8 @@
                                                        for="parent-id">Parent Category</label>
                                                 <select name="parent-id" class="form-control select2"
                                                         data-placeholder="Select" id="parent-id">
-                                                    <option></option>
+                                                        <option value="">Select</option>
+
                                                     {!! $categories !!}
                                                 </select>
                                             </div>

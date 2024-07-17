@@ -62,7 +62,7 @@
             $data[ 'title' ]      = 'Edit Countries';
             $data[ 'category' ]   = $category;
             $tree                 = ( new GeneralService() ) -> buildTree ( collect ( ( new CategoryService() ) -> all () ) -> toArray () );
-            $options              = ( new GeneralService() ) -> convertToOptions ( $tree, false, 0, $category -> id );
+            $options              = ( new GeneralService() ) -> convertToOptions ( $tree, false, 0, $category -> parent_id );
             $data[ 'categories' ] = $options;
             return view ( 'settings.categories.update', $data );
         }
