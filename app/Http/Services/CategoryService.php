@@ -23,8 +23,13 @@
         }
         
         public function edit ( $request, $category ): void {
+            // dd( $request->all() , $category );
             $category -> user_id = auth () -> user () -> id;
             $category -> title   = $request -> input ( 'title' );
+            $category -> parent_id =  $request -> input ( 'parent-id' );
+            $category -> icon =  $request -> input ( 'icon' );
+
+           
             
             if ( $request -> hasFile ( 'image' ) )
                 $category -> image = ( new GeneralService() ) -> upload_image ( $request, './uploads/categories/' );

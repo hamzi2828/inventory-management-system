@@ -7,6 +7,7 @@
     use App\Models\Account;
     use App\Models\Courier;
     use App\Models\Customer;
+    use App\Models\FinancialYear;
     use App\Models\GeneralLedger;
     use App\Models\Vendor;
     use App\Services\GeneralService;
@@ -1160,12 +1161,8 @@
             
             if ( !empty( trim ( $date ) ) ) {
                 
-                $month = date ( 'm' );
-                if ( $month < 7 )
-                    $year = date ( 'Y' ) - 1;
-                else
-                    $year = date ( 'Y' );
-                $start_date = $year . '-07-01';
+                $financial_year = FinancialYear ::first ();
+                $start_date     = $financial_year -> start_date;
                 $trans_date = date ( 'Y-m-d', strtotime ( $date . ' -1 day' ) );
                 
                 $balances = GeneralLedger ::where ( [ 'account_head_id' => $acc_head_id ] )
