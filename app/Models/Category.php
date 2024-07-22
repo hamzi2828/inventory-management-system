@@ -6,12 +6,12 @@
     use Illuminate\Database\Eloquent\Model;
     use Illuminate\Database\Eloquent\SoftDeletes;
     
-    class Category extends Model {
+    class Category extends Model { 
         use HasFactory;
         use SoftDeletes;
         
         protected $guarded = [];
-        
+        protected $fillable = [ 'status']; 
         public function logs () {
             return $this -> morphMany ( Log::class, 'logable' );
         }

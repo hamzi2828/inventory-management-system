@@ -90,4 +90,14 @@
             
             return redirect () -> back () -> with ( 'message', 'Category has been deleted.' );
         }
+
+        public function updateStatus(Request $request, Category $category)
+        {
+            $this->authorize('delete', $category);
+    
+            $category->status = $category->status === 'active' ? 'inactive' : 'active';
+            $category->save();
+    
+            return redirect()->back()->with('success', 'Category status updated successfully.');
+        }
     }

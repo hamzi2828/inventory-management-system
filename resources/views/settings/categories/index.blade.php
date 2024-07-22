@@ -50,6 +50,21 @@
                                                                     </button>
                                                                 </form>
                                                             @endcan
+                                                              
+                                                            @can('delete', $category)
+                                                          
+                                                                <form method="post" class="mb-25" action="{{ route('category.status', ['category' => $category->id]) }}">
+                                                                    @csrf
+                                                                    @method('PATCH')
+                                                                
+                                                                    <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-warning btn-sm d-block w-100">
+                                                                        {{ $category->status === 'active' ? ' Activated' : 'Deactivated' }}
+                                                                    </button>
+                                                                </form>
+                                                           
+                                                        @endcan
+
+
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -71,7 +86,7 @@
             $ ( "div.head-label" ).html ( '<h4 class="fw-bolder mb-0">{{ $title }}</h6>' );
         </script>
 
-<script>
+<script>  
     // Convert PHP array to JavaScript object
     const categories = @json($categories);
 </script>

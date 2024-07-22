@@ -145,8 +145,13 @@
         //     'status'
         // ] ) -> name ( 'users.status' );
         Route::patch('/users/{user}/status', [UserController::class, 'status'])->name('users.status');
-
+     
         
+
+Route::patch('/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('category.status');
+
+
+         
         Route ::resource ( 'users', UserController::class ) -> except ( [ 'show' ] );
         
         Route ::prefix ( 'settings' ) -> group ( function () {
