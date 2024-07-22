@@ -62,18 +62,16 @@
                                                             @endcan
                                                             
                                                             @can('status', $user)
-                                                                @if(auth () -> user () -> id != $user -> id)
-                                                                    <form method="post" class="mb-25"
-                                                                          action="{{ route ('users.status', ['user' => $user -> id]) }}">
-                                                                        @csrf
-                                                                        <button type="button"
-                                                                                onclick="return confirm('Are you sure?')"
-                                                                                class="btn btn-warning btn-sm d-block w-100">
-                                                                            Active/Inactive
-                                                                        </button>
-                                                                    </form>
-                                                                @endif
-                                                            @endcan
+                                                            @if(auth()->user()->id != $user->id)
+                                                                <form method="post" class="mb-25" action="{{ route('users.status', ['user' => $user->id]) }}">
+                                                                    @csrf
+                                                                    @method('PATCH')
+                                                                    <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-warning btn-sm d-block w-100">
+                                                                        Active/Inactive
+                                                                    </button>
+                                                                </form>
+                                                            @endif
+                                                        @endcan
                                                             
                                                             @can('delete', $user)
                                                                 @if(auth () -> user () -> id != $user -> id)

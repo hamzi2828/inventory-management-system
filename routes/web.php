@@ -140,10 +140,12 @@
             'theme'
         ] );
         
-        Route ::get ( 'users/{user}/status', [
-            UserController::class,
-            'status'
-        ] ) -> name ( 'users.status' );
+        // Route ::get ( 'users/{user}/status', [
+        //     UserController::class,
+        //     'status'
+        // ] ) -> name ( 'users.status' );
+        Route::patch('/users/{user}/status', [UserController::class, 'status'])->name('users.status');
+
         
         Route ::resource ( 'users', UserController::class ) -> except ( [ 'show' ] );
         
