@@ -17,6 +17,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Title</th>
+                                            <th>Title</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -25,6 +26,7 @@
                                             @foreach($categories as $category)
                                                 <tr>
                                                     <td>{{ $loop -> iteration }}</td>
+                                                    <td>{{ $category -> parent_id }}</td>
                                                     <td>{{ $category -> title }}</td>
                                                     <td>
                                                         <div class="align-content-start d-flex justify-content-start">
@@ -68,5 +70,33 @@
         <script type="text/javascript">
             $ ( "div.head-label" ).html ( '<h4 class="fw-bolder mb-0">{{ $title }}</h6>' );
         </script>
+
+<script>
+    // Convert PHP array to JavaScript object
+    const categories = @json($categories);
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Create a map of category IDs to titles
+        const categoryMap = categories.reduce((map, category) => {
+            map[category.id] = category.title;
+            return map;
+        }, {});
+
+        // Select all rows in the table
+        const rows = document.querySelectorAll('.datatable tbody tr');
+
+        rows.forEach(row => {
+            const parentIdCell = row.querySelector('td:nth-child(2)'); // Adjust if the column position changes
+            const parentId = parentIdCell.textContent.trim();
+
+            // If parentId is not null or empty, replace it with the title
+            if (parentId && categoryMap[parentId]) {
+                parentIdCell.textContent = categoryMap[parentId];
+            }
+        });
+    });
+</script>
+
     @endpush
 </x-dashboard>
