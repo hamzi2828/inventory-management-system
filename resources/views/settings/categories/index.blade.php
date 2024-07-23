@@ -16,7 +16,7 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Title</th>
+                                            <th>Parant</th>
                                             <th>Title</th>
                                             <th>Actions</th>
                                         </tr>
