@@ -1,5 +1,6 @@
 <x-dashboard :title="$title">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -23,7 +24,7 @@
                                                 <label class="col-form-label font-small-4"
                                                        for="parent-id">Parent Category 
                                                        <button type="button" class="btn btn-secondary py-0 ms-2" onclick="clearSelection()">
-                                                        Clear
+                                                        <i class="fas fa-times"></i>
                                                     </button>
                                                 </label>
                                                 <select name="parent-id" class="form-control select2"
@@ -94,4 +95,5 @@
             $(selectElement).trigger('change'); // Trigger change event if using Select2
         }
     </script>
+    
 </x-dashboard>
