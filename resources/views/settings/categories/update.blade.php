@@ -1,4 +1,5 @@
 <x-dashboard :title="$title">
+    
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -13,20 +14,25 @@
                                     <h4 class="card-title">{{ $title }}</h4>
                                 </div>
                                 <form class="form" method="post" enctype="multipart/form-data"
-                                      action="{{ route ('categories.update', ['category' => $category -> id]) }}">
+                                      action="{{ route('categories.update', ['category' => $category->id]) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="card-body pt-0">
                                         <div class="row">
                                             <div class="col-md-3 mb-1">
                                                 <label class="col-form-label font-small-4"
-                                                       for="parent-id">Parent Category</label>
+                                                       for="parent-id">Parent Category 
+                                                       <button type="button" class="btn btn-secondary py-0 ms-2" onclick="clearSelection()">
+                                                        Clear
+                                                    </button>
+                                                </label>
                                                 <select name="parent-id" class="form-control select2"
                                                         data-placeholder="Select" id="parent-id">
                                                         <option value="">Select</option>
-
                                                     {!! $categories !!}
                                                 </select>
+                                                <!-- Hidden input to track cleared selection -->
+                                                <input type="hidden" name="parent-id-clear" id="parent-id-clear" value="">
                                             </div>
                                             
                                             <div class="col-md-3 mb-1">
@@ -34,7 +40,7 @@
                                                        for="icon">Icon</label>
                                                 <input type="text" id="icon" class="form-control" name="icon"
                                                        autofocus="autofocus"
-                                                       value="{{ old ('icon', $category -> icon) }}" />
+                                                       value="{{ old('icon', $category->icon) }}" />
                                             </div>
                                             
                                             <div class="col-md-4 mb-1">
@@ -42,14 +48,14 @@
                                                        for="title">Title</label>
                                                 <input type="text" id="title" class="form-control"
                                                        required="required" name="title"
-                                                       value="{{ old ('title', $category -> title) }}" />
+                                                       value="{{ old('title', $category->title) }}" />
                                             </div>
                                             
                                             <div class="col-md-2 mb-1">
                                                 <label class="col-form-label font-small-4">Banner Image</label>
                                                 <div class="align-items-center border d-flex flex-column justify-content-center pt-50 rounded-2">
                                                     <div class="custom-avatar ps-1 pe-1">
-                                                        <img src="{{ $category -> image() }}"
+                                                        <img src="{{ $category->image() }}"
                                                              id="account-upload-img" class="uploadedAvatar rounded"
                                                              alt="profile image"
                                                              style="max-width: 100%; max-height: 100%" />
@@ -76,4 +82,16 @@
             </div>
         </div>
     </div>
+
+    <script>
+        function clearSelection() {
+            var selectElement = document.getElementById('parent-id');
+            var hiddenInput = document.getElementById('parent-id-clear');
+            
+            selectElement.value = ''; // Clear the selected value
+            hiddenInput.value = 'null'; // Set hidden input value to 'null'
+            
+            $(selectElement).trigger('change'); // Trigger change event if using Select2
+        }
+    </script>
 </x-dashboard>
