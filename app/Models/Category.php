@@ -11,7 +11,7 @@
         use SoftDeletes;
         
         protected $guarded = [];
-        protected $fillable = [ 'status']; 
+        // protected $fillable = [ 'status']; 
         public function logs () {
             return $this -> morphMany ( Log::class, 'logable' );
         }
