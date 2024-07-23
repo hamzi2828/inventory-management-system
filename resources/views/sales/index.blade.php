@@ -1,3 +1,5 @@
+
+
 <x-dashboard :title="$title">
     <div class="app-content content ">
         <div class="content-overlay"></div>
@@ -5,7 +7,7 @@
         <div class="content-wrapper p-0">
             <div class="content-header row">
             </div>
-            <div class="content-body">
+            <div class="content-body"> 
                 <!-- Basic table -->
                 <section id="basic-datatable">
                     <div class="row">
@@ -110,14 +112,23 @@
                                                                         Close
                                                                     </a>
                                                                 @endcan
-                                                                
+{{--                                                                 
                                                                 @can('edit', $sale)
                                                                     <a class="btn btn-primary btn-sm d-block mb-25 me-25"
                                                                        href="{{ route ('sales.edit', ['sale' => $sale -> id]) }}">
                                                                         Edit
                                                                     </a>
-                                                                @endcan
+                                                                @endcan --}}
                                                                 
+                                                                @can('edit', $sale)
+                                                                    <a class="btn btn-primary btn-sm d-block mb-25 me-25"
+                                                                    href="{{ route('sales.edit', ['sale' => $sale->id]) }}"
+                                                                    data-created-by="{{ $sale->user_id }}"
+                                                                    onclick="return checkOrderCreator(this)">
+                                                                        Edit
+                                                                    </a>
+                                                                @endcan
+
                                                                 @can('delete', $sale)
                                                                     <form method="post"
                                                                           id="delete-confirmation-dialog-{{ $sale -> id }}"
@@ -191,5 +202,22 @@
         <script type="text/javascript">
             $ ( "div.head-label" ).html ( '<h4 class="fw-bolder mb-0">{{ $title }}</h6>' );
         </script>
+
+
+@push('custom-scripts')
+    <script type="text/javascript">
+        function checkOrderCreator(element) {
+            var orderCreatorId = element.getAttribute('data-created-by');
+            var loggedInUserId = "{{ Auth::id() }}";
+
+            if (orderCreatorId != loggedInUserId) {
+                return confirm('You are not the creator of this order. Are you sure you want to edit it?');
+            }
+
+            return true;
+        }
+    </script>
+@endpush
+
     @endpush
 </x-dashboard>
