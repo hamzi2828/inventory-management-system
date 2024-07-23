@@ -17,7 +17,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Parant</th>
-                                            <th>Title</th>
+                                            <th>Chaild</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
