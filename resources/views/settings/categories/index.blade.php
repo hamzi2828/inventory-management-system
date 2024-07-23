@@ -18,6 +18,7 @@
                                             <th>#</th>
                                             <th>Parant</th>
                                             <th>Chaild</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -28,6 +29,7 @@
                                                     <td>{{ $loop -> iteration }}</td>
                                                     <td>{{ $category -> parent_id }}</td>
                                                     <td>{{ $category -> title }}</td>
+                                                    <th>{{ $category -> status }}</th>
                                                     <td>
                                                         <div class="align-content-start d-flex justify-content-start">
                                                             @can('edit', $category)
@@ -58,7 +60,8 @@
                                                                     @method('PATCH')
                                                                 
                                                                     <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-warning btn-sm d-block w-100">
-                                                                        {{ $category->status === 'active' ? ' Activated' : 'Deactivated' }}
+                                                                        Active / Inactive
+                                                                        {{-- {{ $category->status === 'active' ? ' Activated' : 'Deactivated' }} --}}
                                                                     </button>
                                                                 </form>
                                                            
