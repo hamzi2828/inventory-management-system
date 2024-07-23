@@ -59,9 +59,8 @@
                                                                     @csrf
                                                                     @method('PATCH')
                                                                 
-                                                                    <button type="submit" onclick="return confirm('Are you sure?')" class="btn btn-warning btn-sm d-block w-100">
+                                                                    <button type="submit" onclick="return confirmStatusChange('{{ $category->status }}')" class="btn btn-warning btn-sm d-block w-100">
                                                                         Active / Inactive
-                                                                        {{-- {{ $category->status === 'active' ? ' Activated' : 'Deactivated' }} --}}
                                                                     </button>
                                                                 </form>
                                                            
@@ -94,6 +93,17 @@
     const categories = @json($categories);
 </script>
 <script>
+      function confirmStatusChange(currentStatus) {
+        var message = '';
+        
+        if (currentStatus === 'active') {
+            message = 'If category is inactive it shall not show on front-end';
+        } else {
+            message = 'Are you sure you want to activate this category? It will be visible on the front-end.';
+        }
+
+        return confirm(message);
+    }
     document.addEventListener('DOMContentLoaded', function() {
         // Create a map of category IDs to titles
         const categoryMap = categories.reduce((map, category) => {
