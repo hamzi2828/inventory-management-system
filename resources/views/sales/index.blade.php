@@ -1,5 +1,4 @@
 
-
 <x-dashboard :title="$title">
     <div class="app-content content ">
         <div class="content-overlay"></div>
@@ -112,7 +111,7 @@
                                                                         Close
                                                                     </a>
                                                                 @endcan
-{{--                                                                 
+                                                            {{--                                                                 
                                                                 @can('edit', $sale)
                                                                     <a class="btn btn-primary btn-sm d-block mb-25 me-25"
                                                                        href="{{ route ('sales.edit', ['sale' => $sale -> id]) }}">
@@ -123,7 +122,7 @@
                                                                 @can('edit', $sale)
                                                                     <a class="btn btn-primary btn-sm d-block mb-25 me-25"
                                                                     href="{{ route('sales.edit', ['sale' => $sale->id]) }}"
-                                                                    data-created-by="{{ $sale->user_id }}"
+                                                                    data-created-by="{{ $sale->user->branch_id  }}"
                                                                     onclick="return checkOrderCreator(this)">
                                                                         Edit
                                                                     </a>
@@ -167,6 +166,7 @@
                                                     </td>
                                                     <td>
                                                         {{ $sale -> user ?-> name }}
+                                                        {{-- <td>{{ $sale->user ? $sale->user->name . ' (Branch ID: ' . $sale->user->branch_id . ')' : '' }}</td> --}}
                                                     </td>
                                                     <td>
                                                         {{ $sale -> customer -> name }}
@@ -207,11 +207,11 @@
 @push('custom-scripts')
     <script type="text/javascript">
         function checkOrderCreator(element) {
-            var orderCreatorId = element.getAttribute('data-created-by');
-            var loggedInUserId = "{{ Auth::id() }}";
+            var orderCreatorBranchId = element.getAttribute('data-created-by');
+            var loggedInUserbranchId = "{{ Auth::user()->branch_id }}";
 
-            if (orderCreatorId != loggedInUserId) {
-                return confirm('You are not the creator of this order. Are you sure you want to edit it?');
+            if (orderCreatorBranchId != loggedInUserbranchId) {
+                return confirm('You are not the creator of this order. and your branch ID does not match . Are you sure you want to edit it?');
             }
 
             return true;
