@@ -1,4 +1,9 @@
 <x-dashboard :title="$title">
+    <style>
+        .normal-font-weight {
+    font-weight: normal;
+}
+    </style>
     <div class="app-content content ">
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
@@ -17,7 +22,7 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Parant</th>
-                                            <th>Chaild</th>
+                                            <th>Child</th>
                                             <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
@@ -29,7 +34,8 @@
                                                     <td>{{ $loop -> iteration }}</td>
                                                     <td>{{ $category -> parent_id }}</td>
                                                     <td>{{ $category -> title }}</td>
-                                                    <th>{{ $category -> status }}</th>
+                                                    <th style="font-weight: normal;">{{ $category->status }}</th>
+
                                                     <td>
                                                         <div class="align-content-start d-flex justify-content-start">
                                                             @can('edit', $category)
