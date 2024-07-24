@@ -21,7 +21,7 @@
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Parant</th>
+                                            <th>Parent</th>
                                             <th>Child</th>
                                             <th>Status</th>
                                             <th>Actions</th>
