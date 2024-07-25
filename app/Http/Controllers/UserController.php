@@ -45,7 +45,7 @@
         }
         
         /**
-         * --------------
+         * -------------- 
          * Show the form for creating a new resource.
          * @return \Illuminate\Http\Response
          * --------------
@@ -163,12 +163,25 @@
             return redirect () -> back () -> with ( 'message', 'User has been deleted.' );
         }
         
-        public function status ( User $user ) {
-            $this -> authorize ( 'status', $user );
-            $user -> status = !$user -> status;
-            $user -> update ();
-            return redirect () -> back () -> with ( 'message', 'User status has been updated.' );
+        public function status(User $user)
+        {
+            $this->authorize('status', $user);
+             // Store the previous status
+            $previousStatus = $user->status;
+           if($previousStatus == 'Inactive'){
+            $previousStatus = 'Active';
+            $user->status = '1';
+            $user->save();
+            return redirect()->back()->with('message', 'User status has been updated.');
+           }
+            else{
+            // Toggle the status
+            $user->status = !$user->status;
+            $user->save();
+            }
+            return redirect()->back()->with('message', 'User status has been updated.');
         }
+        
         
         public function theme () {
             try {
