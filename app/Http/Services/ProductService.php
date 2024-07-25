@@ -16,7 +16,7 @@
     use Illuminate\Support\Facades\File;
     use Intervention\Image\ImageManager;
     
-    class ProductService {
+    class ProductService { 
         
         /**
          * --------------
@@ -205,6 +205,7 @@
         
         private function upload_slider_image ( $request ) {
             $savePath = './uploads/products/sliders';
+            // dd($request->all());
             
             File ::ensureDirectoryExists ( $savePath, 0755, true );
             
@@ -213,11 +214,15 @@
                 $filename        = pathinfo ( $filenameWithExt, PATHINFO_FILENAME );
                 $extension       = $request -> file ( 'slider-image' ) -> getClientOriginalExtension ();
                 $fileNameToStore = $filename . '-' . time () . '.' . $extension;
-                $path            = $request -> file ( 'slider-image ' ) -> storeAs ( $savePath, $fileNameToStore );
-                $image           = ImageManager ::imagick () -> read ( $path );
-                $image -> scale ( height: 600 );
-                $image -> save ( $path );
-                return $path;
+                // $path            = $request -> file ( 'slider-image ' ) -> storeAs ( $savePath, $fileNameToStore );
+                 // Correct the key to 'slider-image' without extra space
+                // $path = $request->file('slider-image')->storeAs($savePath, $fileNameToStore, 'public');
+                return $request -> file ( 'slider-image' ) -> storeAs ( $savePath, $fileNameToStore );
+                // dd($path);
+                // $image           = ImageManager ::imagick () -> read ( $path );
+                // $image -> scale ( height: 600 );
+                // $image -> save ( $path );
+                // return $path;
             }
         }
         
