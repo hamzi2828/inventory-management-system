@@ -30,7 +30,7 @@
          * @return \Illuminate\Http\Response
          * --------------
          */
-        
+         
         public function index () {
             $this -> authorize ( 'viewAllIssuance', Issuance::class );
             $data[ 'title' ] = 'All Transfers';
