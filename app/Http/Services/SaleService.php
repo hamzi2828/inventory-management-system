@@ -259,17 +259,34 @@
                 'boxes'               => $boxes,
                 'remarks'             => $request -> input ( 'remarks' ),
             );
+
+            // dd( $info );
             
             return Sale ::create ( $info );
             
         }
         
-        private function generateSaleId (): string {
-            $date      = now () -> format ( 'Ymd' );
-            $lastSale  = Sale ::latest () -> first ();
-            $increment = $lastSale ? intval ( substr ( $lastSale -> id, 9 ) ) + 1 : 1;
-            return $date . sprintf ( '%04d', $increment );
+        // private function generateSaleId (): string {
+        //     $date      = now () -> format ( 'Ymd' );
+        //     $lastSale  = Sale ::latest () -> first ();
+        //     $increment = $lastSale ? intval ( substr ( $lastSale -> id, 9 ) ) + 1 : 1;
+        //     return $date . sprintf ( '%04d', $increment );
+        // }
+        private function generateSaleId(): string {
+            $date = now()->format('Ymd');
+            
+            // Fetch the last sale record
+            $lastSale = Sale::whereRaw("DATE(created_at) = CURDATE()") // Ensures it's from today
+                            ->orderBy('created_at', 'desc')
+                            ->first();
+        
+            // Determine the next increment value
+            $increment = $lastSale ? intval(substr($lastSale->sale_id, 9)) + 1 : 1;
+        
+            // Return the formatted sale ID
+            return $date . sprintf('%04d', $increment);
         }
+        
         
         /**
          * --------------
@@ -480,7 +497,7 @@
          * @param $sale
          * @return float|int
          * get sales total price
-         * --------------
+         * -------------- 
          */
         
         public function get_cost_of_sale_tp_wise ( $sale ): float | int {
