@@ -26,7 +26,7 @@
             // dd( $request->all() , $category );
             $category -> user_id = auth () -> user () -> id;
             $category -> title   = $request -> input ( 'title' );
-            $category -> parent_id =  $request -> input ( 'parent-id' );
+            $category -> parent_id =  $request -> input ( 'category-id' );
             $category -> icon =  $request -> input ( 'icon' );
 
            
