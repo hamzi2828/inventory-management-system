@@ -20,20 +20,14 @@
                                     @method('PUT')
                                     <div class="card-body pt-0">
                                         <div class="row">
-                                            <div class="col-md-3 mb-1">
-                                                <label class="col-form-label font-small-4"
-                                                       for="parent-id">Parent Category 
-                                                       <button type="button" class="btn btn-secondary py-0 ms-2" onclick="clearSelection()">
-                                                        <i class="fas fa-times"></i>
-                                                    </button>
-                                                </label>
-                                                <select name="parent-id" class="form-control select2"
-                                                        data-placeholder="Select" id="parent-id">
-                                                        <option value="">Select</option>
+                                            <div class="col-md-3 form-group">
+                                                <label class="col-form-label font-small-4" for="category-id">Category</label>
+                                                <select name="category-id" class="form-control select2" data-placeholder="Select"
+                                                        data-allow-clear="true"
+                                                        id="category-id">
+                                                    <option></option>
                                                     {!! $categories !!}
                                                 </select>
-                                                <!-- Hidden input to track cleared selection -->
-                                                <input type="hidden" name="parent-id-clear" id="parent-id-clear" value="">
                                             </div>
                                             
                                             <div class="col-md-3 mb-1">
