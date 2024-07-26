@@ -16,6 +16,11 @@
                     <input type="text" name="sku" class="form-control" id="sku"
                            value="{{ request ('sku') }}">
                 </div>
+                <div class="col-md-3 form-group">
+                    <label class="col-form-label font-small-4" for="barcode">Barcode</label>
+                    <input type="text" name="barcode" class="form-control" id="barcode"
+                           value="{{ request ('barcode') }}">
+                </div>
                 
                 <div class="col-md-3 form-group">
                     <label class="col-form-label font-small-4" for="manufacturer-id">Manufacturer</label>

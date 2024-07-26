@@ -25,26 +25,59 @@
          * --------------
          */
         
-        public function all ( $pagination = false ) {
-            $rows     = request ( 'rows', 25 );
-            $products = Product ::with ( [ 'manufacturer', 'category', 'term' ] );
+        // public function all ( $pagination = false ) {
+        //     $rows     = request ( 'rows', 25 );
+        //     $products = Product ::with ( [ 'manufacturer', 'category', 'term' ] );
             
-            if ( request () -> filled ( 'title' ) )
-                $products -> where ( 'title', 'LIKE', '%' . request ( 'title' ) . '%' );
+        //     if ( request () -> filled ( 'title' ) )
+        //         $products -> where ( 'title', 'LIKE', '%' . request ( 'title' ) . '%' );
             
-            if ( request () -> filled ( 'sku' ) )
-                $products -> where ( [ 'sku' => request ( 'sku' ) ] );
+        //     if ( request () -> filled ( 'sku' ) )
+        //         $products -> where ( [ 'sku' => request ( 'sku' ) ] );
             
-            if ( request () -> filled ( 'manufacturer-id' ) )
-                $products -> where ( [ 'manufacturer_id' => request ( 'manufacturer-id' ) ] );
+        //     if ( request () -> filled ( 'manufacturer-id' ) )
+        //         $products -> where ( [ 'manufacturer_id' => request ( 'manufacturer-id' ) ] );
             
-            if ( request () -> filled ( 'category-id' ) )
-                $products -> where ( [ 'category_id' => request ( 'category-id' ) ] );
+        //     if ( request () -> filled ( 'category-id' ) )
+        //         $products -> where ( [ 'category_id' => request ( 'category-id' ) ] );
             
+        //     $products -> latest ();
+        //     return $pagination ? $products -> get () : $products -> paginate ( $rows );
+        // }
+        public function all($pagination = false) {
+            $rows = request('rows', 25); // Default rows per page
+        
+            // Start building the query
+            $products = Product::with(['manufacturer', 'category', 'term']);
+        
+            // Apply filters if query parameters are filled
+            if (request()->filled('title')) {
+                $products->where('title', 'LIKE', '%' . request('title') . '%');
+            }
+        
+            if (request()->filled('sku')) {
+                $products->where('sku', request('sku'));
+            }
+        
+            if (request()->filled('manufacturer-id')) {
+                $products->where('manufacturer_id', request('manufacturer-id'));
+            }
+        
+            if (request()->filled('barcode')) {
+                $products->where('barcode', request('barcode')); // Corrected to use 'barcode'
+            }
+        
+            if (request()->filled('category-id')) {
+                $products->where('category_id', request('category-id'));
+            }
+        
+            // Order by latest added
+            $products->latest();
+        
+            // Paginate if requested, otherwise get all results
             $products -> latest ();
             return $pagination ? $products -> get () : $products -> paginate ( $rows );
         }
-        
         /**
          * --------------
          * @return mixed
