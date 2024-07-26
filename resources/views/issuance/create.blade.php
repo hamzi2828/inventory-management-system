@@ -28,20 +28,22 @@
                                             <div class="offset-md-2 col-md-4 mb-1">
                                                 <label class="col-form-label font-small-4"
                                                        for="title">Transfer From</label>
-                                                {{-- <select name="from-branch-id" class="form-control select2"
+                                                <select name="from-branch-id" class="form-control select2"
                                                         id="transfer-from-branch"
                                                         required="required" data-placeholder="Select">
                                                     <option></option>
                                                     @if(count ($branches) > 0)
                                                         @foreach($branches as $branch)
+                                                        @if($branch->id == Auth::user()->branch_id)
                                                             <option value="{{ $branch -> id }}" @selected(old ('from-branch-id') == $branch -> id)>
                                                                 {{ $branch -> name }}
                                                             </option>
+                                                            @endif
                                                         @endforeach
                                                     @endif
-                                                </select> --}}
+                                                </select>
 
-                                                <select name="from-branch-id" class="form-control select2"
+                                                {{-- <select name="from-branch-id" class="form-control select2"
                                                     id="transfer-from-branch"
                                                     required="required" data-placeholder="Select">
                                                 <option></option>
@@ -52,7 +54,7 @@
                                                         </option>
                                                     @endif
                                                 @endforeach
-                                            </select>
+                                            </select> --}}
 
 
                                             </div>
@@ -60,18 +62,20 @@
                                             <div class="col-md-4 mb-1">
                                                 <label class="col-form-label font-small-4"
                                                        for="title">Transfer To</label>
-                                                {{-- <select name="to-branch-id" class="form-control select2"
+                                                <select name="to-branch-id" class="form-control select2"
                                                         required="required" data-placeholder="Select">
                                                     <option></option>
                                                     @if(count ($branches) > 0)
                                                         @foreach($branches as $branch)
+                                                        @if($branch->id != Auth::user()->branch_id)
                                                             <option value="{{ $branch -> id }}" @selected(old ('to-branch-id') == $branch -> id)>
                                                                 {{ $branch -> name }}
                                                             </option>
+                                                            @endif
                                                         @endforeach
                                                     @endif
-                                                </select> --}}
-                                                <select name="to-branch-id" class="form-control select2"
+                                                </select> 
+                                                {{-- <select name="to-branch-id" class="form-control select2"
                                                         required="required" data-placeholder="Select">
                                                     <option></option>
                                                     @foreach($branches as $branch)
@@ -81,7 +85,7 @@
                                                             </option>
                                                         @endif
                                                     @endforeach
-                                                </select>
+                                                </select> --}}
 
                                             </div>
                                         </div>
