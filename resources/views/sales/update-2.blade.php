@@ -296,7 +296,7 @@
                                     </div>
                                     <div class="card-footer">
                                         @if($sale -> sale_closed == '0')
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="submit" class="btn btn-primary">Update</button>
                                             @can('close_bill', $sale)
                                                 <a class="btn btn-info d-inline-block m-0 mt-25 ms-25"
                                                    onclick="return confirm('Are you sure?')"
@@ -326,6 +326,43 @@
                     
                 } );
             } );
+
+
+            document.addEventListener('DOMContentLoaded', function() {
+                // Get the close button
+                const closeButton = document.querySelector('a.btn.btn-info');
+
+                // Get all input elements in the form
+                const inputs = document.querySelectorAll('.form input, .form textarea');
+
+                // Function to disable the close button
+                function disableCloseButton() {
+                    closeButton.style.pointerEvents = 'none';
+                    closeButton.style.opacity = '0.5';
+                }
+
+                // Function to enable the close button
+                function enableCloseButton() {
+                    closeButton.style.pointerEvents = 'auto';
+                    closeButton.style.opacity = '1';
+                }
+
+                // Add event listeners to all input elements to disable the close button on change
+                inputs.forEach(function(input) {
+                    input.addEventListener('change', function() {
+                        disableCloseButton();
+                    });
+                    input.addEventListener('input', function() {
+                        disableCloseButton();
+                    });
+                });
+
+                // Enable the close button on form load if it is not supposed to be disabled
+                if (closeButton) {
+                    enableCloseButton();
+                }
+            });
+
         </script>
     @endpush
 </x-dashboard>
