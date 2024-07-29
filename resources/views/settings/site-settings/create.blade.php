@@ -261,6 +261,35 @@
                                                                name="shipping-charges" class="form-control"
                                                                 @readonly(optional ($settings -> settings) -> shipping === '0')>
                                                     </div>
+
+
+                                                    <div class="col-md-12">
+                                                        <h2 class="mt-1 mb-1 border-bottom text-danger fw-bolder pb-25">
+                                                        Currency
+                                                        </h2>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-4 mb-1">
+                                                        <label class="col-form-label font-small-4" for="currency">
+                                                            Currency
+                                                        </label>
+                                                        <select name="currency" class="form-control select2"
+                                                                data-placeholder="Select" required="required"
+                                                                id="currency">
+                                                            <option></option>
+                                                            <option value="Rs" @selected(optional ($settings -> settings) -> currency === 'Rs')>
+                                                                Rs (PKR)
+                                                            </option>
+                                                            <option value="€" @selected(optional ($settings -> settings) -> currency === '€')>
+                                                                € (EU)
+                                                            </option>
+                                                            <option value="$" @selected(optional ($settings -> settings) -> currency === '$')>
+                                                                $ (USD)
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    
+                                                    
                                                 </div>
                                             </div>
                                             

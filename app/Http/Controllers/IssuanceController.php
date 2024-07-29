@@ -97,7 +97,7 @@
         
         public function edit ( Issuance $issuance ) {
             $this -> authorize ( 'edit', $issuance );
-            $data[ 'title' ] = 'Edit Issuance';
+            $data[ 'title' ] = 'Edit Transfer';
             $data[ 'branches' ] = $this -> branchService -> all ();
             $data[ 'issuance' ] = $issuance -> load ( 'products.product' );
             return view ( 'issuance.update', $data );

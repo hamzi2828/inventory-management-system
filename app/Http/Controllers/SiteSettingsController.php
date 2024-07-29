@@ -12,7 +12,7 @@
     
     class SiteSettingsController extends Controller {
         
-        public function create () {
+        public function create () { 
             $this -> authorize ( 'create', SiteSettings::class );
             $data[ 'title' ]    = 'Site Settings';
             $data[ 'settings' ] = ( new SiteSettingService() ) -> get_settings_by_slug ( 'site-settings' );

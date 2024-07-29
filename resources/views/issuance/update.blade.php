@@ -3,7 +3,7 @@
         <div class="content-overlay"></div>
         <div class="header-navbar-shadow"></div>
         <div class="content-wrapper p-0">
-            <div class="content-body">
+            <div class="content-body"> 
                 <section id="basic-horizontal-layouts">
                     <div class="row">
                         <div class="col-md-12 col-md-12">
@@ -103,7 +103,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="submit" class="btn btn-primary me-1">Submit</button>
+                                        <button type="submit" class="btn btn-primary me-1">Update</button>
                                     </div>
                                 </form>
                             </div>

@@ -53,6 +53,8 @@
                 'shipping_charges'              => $request -> input ( 'shipping-charges' ),
                 'display_out_of_stock_products' => $request -> input ( 'display-out-of-stock-products' ),
                 'display_top_categories'        => $request -> input ( 'display-top-categories' ),
+                'currency'                      => $request->input('currency'),
+
             ];
             
             if ( $request -> hasFile ( 'logo' ) )
