@@ -20,6 +20,7 @@
                                          'discount'    => $request -> input ( 'discount' ),
                                          'start_date'  => $request -> filled ( 'start-date' ) ? $start_date : null,
                                          'end_date'    => $request -> filled ( 'end-date' ) ? $end_date : null,
+                                         'use_frequency' => $request -> input ( 'use-frequency' ),
                                          'description' => $request -> input ( 'description' ),
                                      ] );
         }
@@ -33,6 +34,7 @@
             $courier -> discount    = $request -> input ( 'discount' );
             $courier -> start_date  = $request -> filled ( 'start-date' ) ? $start_date : null;
             $courier -> end_date    = $request -> filled ( 'end-date' ) ? $end_date : null;
+            $courier -> use_frequency = $request -> input ( 'use-frequency' );
             $courier -> description = $request -> input ( 'description' );
             $courier -> update ();
         }

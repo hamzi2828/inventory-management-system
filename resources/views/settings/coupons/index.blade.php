@@ -19,8 +19,11 @@
                                             <th>Title</th>
                                             <th>Code</th>
                                             <th>Discount (%)</th>
+                                            <th>Usage Frequency</th>
+                                            <th>Used Frequency</th>
                                             <th>Start Date</th>
                                             <th>End Date</th>
+                                            <th>Status</th>
                                             <th>Actions</th>
                                         </tr>
                                         </thead>
@@ -32,8 +35,11 @@
                                                     <td>{{ $coupon -> title }}</td>
                                                     <td>{{ $coupon -> code }}</td>
                                                     <td>{{ number_format ($coupon -> discount, 2) }}</td>
+                                                    <th>{{ $coupon -> use_frequency }}</th>
+                                                    <th>{{ $coupon -> used_frequency }}</th>
                                                     <td>{{ $coupon -> start_date }}</td>
                                                     <td>{{ $coupon -> end_date }}</td>
+                                                    <th style="font-weight: normal;">{{ $coupon->status }}</th>
                                                     <td>
                                                         <div class="align-content-start d-flex justify-content-start">
                                                             @can('edit', $coupon)

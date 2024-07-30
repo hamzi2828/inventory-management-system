@@ -6,7 +6,7 @@
             <div class="content-body">
                 <section id="basic-horizontal-layouts">
                     <div class="row">
-                        <div class="col-md-12 col-md-12">
+                        <div class="col-md-12 col-md-12"> 
                             @include('errors.validation-errors')
                             <div class="card">
                                 <div class="border-bottom-light card-header mb-2 pb-1 pb-1">
@@ -56,13 +56,22 @@
                                                        name="end-date" value="{{ old ('end-date') }}" />
                                             </div>
                                             
-                                            <div class="col-md-9 mb-1">
+                                            <div class="col-md-3 mb-1">
+                                                <label class="col-form-label font-small-4"
+                                                       for="use-frequency">Use Frequency</label>
+                                                <input type="text" id="use-frequency" class="form-control"
+                                                       required="required" name="use-frequency" value="{{ old ('use-frequency') }}" />
+                                            </div>
+                                            
+
+                                            <div class="col-md-6 mb-1">
                                                 <label class="col-form-label font-small-4"
                                                        for="description">Description</label>
                                                 <textarea id="description" class="form-control"
                                                           name="description"
                                                           rows="3">{{ old ('description') }}</textarea>
                                             </div>
+
                                         </div>
                                     </div>
                                     <div class="card-footer">

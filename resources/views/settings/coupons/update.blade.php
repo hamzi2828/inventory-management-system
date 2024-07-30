@@ -58,7 +58,16 @@
                                                        value="{{ old ('end-date', $coupon -> end_date) }}" />
                                             </div>
                                             
-                                            <div class="col-md-9 mb-1">
+                                             
+                                            <div class="col-md-3 mb-1">
+                                                <label class="col-form-label font-small-4"
+                                                       for="use-frequency">Use Frequency</label>
+                                                <input type="text" id="use-frequency" class="form-control"
+                                                       required="required" name="use-frequency" value="{{ old ('use_frequency', $coupon -> use_frequency) }}" />
+                                            </div>
+                                            
+
+                                            <div class="col-md-6 mb-1">
                                                 <label class="col-form-label font-small-4"
                                                        for="description">Description</label>
                                                 <textarea id="description" class="form-control"

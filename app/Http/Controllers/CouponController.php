@@ -22,6 +22,7 @@
             $this -> authorize ( 'all', Coupon::class );
             $data[ 'title' ]   = 'All Coupons';
             $data[ 'coupons' ] = $this -> couponService -> all ();
+            
             return view ( 'settings.coupons.index', $data );
         }
         
@@ -34,7 +35,7 @@
         public function store ( CouponFormRequest $request ) {
             $this -> authorize ( 'create', Coupon::class );
             try {
-                DB ::beginTransaction ();
+                DB ::beginTransaction (); 
                 $coupon = $this -> couponService -> save ( $request );
                 DB ::commit ();
                 
