@@ -148,7 +148,7 @@
      
         
 
-Route::patch('/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('category.status');
+    Route::patch('/categories/{category}/status', [CategoryController::class, 'updateStatus'])->name('category.status');
 
 
          
@@ -172,6 +172,10 @@ Route::patch('/categories/{category}/status', [CategoryController::class, 'updat
             Route ::resource ( 'coupons', CouponController::class ) -> except ( [ 'show' ] );
         } );
         
+        Route::patch('/coupons/{coupon}/status', [CouponController::class, 'updateStatus'])->name('coupons.status');
+
+
+
         Route ::get ( 'products/create/variable', [
             ProductController::class,
             'create_variable'

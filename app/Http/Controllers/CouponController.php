@@ -9,6 +9,8 @@
     use Illuminate\Database\QueryException;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
+    use Illuminate\Http\RedirectResponse;
+    use Illuminate\Http\Request;
     
     class CouponController extends Controller {
         
@@ -91,5 +93,16 @@
                 Log ::error ( $exception );
                 return redirect () -> back () -> with ( 'error', $exception -> getMessage () ) -> withInput ();
             }
+        }
+
+        public function updateStatus(Request $request, Coupon $coupon)
+        {
+            
+            $this->authorize('delete', $coupon);
+    
+            $coupon->status = $coupon->status === 'active' ? 'inactive' : 'active';
+            $coupon->save();
+    
+            return redirect()->back()->with('success', 'Category status updated successfully.');
         }
     }
