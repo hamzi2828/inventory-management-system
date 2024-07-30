@@ -244,11 +244,11 @@
                                                             <strong>Shipping</strong>
                                                         </td>
                                                         <td>
-                                                            <select name="shipping" data-placeholder="Select"
+                                                            <select name="shipping" data-placeholder="Select" id="free-shipping"
                                                                     class="form-control select2"
                                                                     required="required">
-                                                                <option></option>
-                                                                <option value="0"
+                                                                
+                                                                <option value="0" 
                                                                         {{ (empty(trim ($sale -> courier_id)) || $sale -> courier_id < 1) ? 'selected="selected"' : '' }}>
                                                                     Free
                                                                 </option>
@@ -327,14 +327,43 @@
                 } );
             } );
 
+            $(document).ready(function() {
+                $('#sale-products').select2({
+                    placeholder: 'Select Product(s)',
+                    allowClear: true
+                });
+
+
+                 // Add change event listener to the #sale-products select element
+                $('#sale-products').on('change', function() {
+                    const closeButton = document.querySelector('a.btn.btn-info');
+                    closeButton.style.pointerEvents = 'none';
+                    closeButton.style.opacity = '0.5';
+                });
+
+            // Initialize Select2
+            $('#free-shipping').select2({
+                placeholder: 'Select',
+                allowClear: true
+            });
+
+            // Add change event listener to the select element
+            $('#free-shipping').on('change', function() {
+                const closeButton = document.querySelector('a.btn.btn-info');
+                closeButton.style.pointerEvents = 'none';
+                closeButton.style.opacity = '0.5';
+
+            });
+        });
 
             document.addEventListener('DOMContentLoaded', function() {
                 // Get the close button
                 const closeButton = document.querySelector('a.btn.btn-info');
 
                 // Get all input elements in the form
-                const inputs = document.querySelectorAll('.form input, .form textarea');
+            const inputs = document.querySelectorAll('.form input, .form textarea, input[name="flat-discount"], input[name="percentage-discount"], input[name="paid-amount"], select[name="shipping"], select[name="customer_id"], #sale-products');
 
+                
                 // Function to disable the close button
                 function disableCloseButton() {
                     closeButton.style.pointerEvents = 'none';
