@@ -218,3 +218,17 @@
         </div>
     </td>
 </tr>
+
+<tr>
+    <td></td>
+    <td>
+        <h5 class="mb-0">Coupon General Report</h5>
+    </td>
+    <td>
+        <div class="form-check form-check-success">
+            <input type="checkbox" class="form-check-input" name="privilege[]"
+                   value="coupon-report-privilege" @checked(!empty($permission) && in_array('coupon-report-privilege', $permission->permission))>
+            <label class="form-check-label">Coupon General Report</label>
+        </div>
+    </td>
+</tr>
