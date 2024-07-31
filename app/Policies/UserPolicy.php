@@ -520,11 +520,4 @@
             else
                 return false;
         }
-
-        public function couponReport ( User $user ) {
-            if ( in_array ( 'coupon-report-privilege', $user -> permissions () ) )
-                return true;
-            else
-                return false;
-        }
     }

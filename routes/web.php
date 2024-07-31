@@ -974,9 +974,5 @@
                 ReportingController::class,
                 'vendor_ageing_report'
             ] ) -> name ( 'vendor-ageing-report' );
-
-            Route ::get ('/coupon-report', [ReportingController::class, 'coupon_report'])->name('coupon-genral-report');
-            Route ::get ('/coupon-search-report', [ReportingController::class, 'coupon_search_report'])->name('coupon-search-report');
-
         } );
     } );

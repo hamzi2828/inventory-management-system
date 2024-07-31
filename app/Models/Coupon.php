@@ -10,11 +10,4 @@
         use HasFactory, SoftDeletes;
         
         protected $guarded = [];
-        public function sales()
-        {
-            return $this->hasMany(Sale::class, 'coupon_id');
-        }
-        
-    
-
     }

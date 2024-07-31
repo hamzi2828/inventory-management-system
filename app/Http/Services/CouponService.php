@@ -10,46 +10,6 @@
             return Coupon ::get ();
         }
         
-        public function coupon_report()
-        {
-            // Retrieve all coupons with their related sales
-             $coupons = Coupon::with(['sales.user'])->get();
-            // Return the result as a JSON response
-            return $coupons->toArray(); // Convert to array
-        }
-
-        public function coupon_search_report($couponId = null, $startDate = null, $endDate = null)
-        {
-            $query = Coupon::query();
-        
-            if ($couponId) {
-                $query->where('id', $couponId);
-            }
-        
-            $query->whereHas('sales', function ($query) use ($startDate, $endDate) {
-                if ($startDate) {
-                    $query->whereDate('created_at', '>=', $startDate);
-                }
-                if ($endDate) {
-                    $query->whereDate('created_at', '<=', $endDate);
-                }
-            });
-        
-            $query->with(['sales' => function ($query) use ($startDate, $endDate) {
-                if ($startDate) {
-                    $query->whereDate('created_at', '>=', $startDate);
-                }
-                if ($endDate) {
-                    $query->whereDate('created_at', '<=', $endDate);
-                }
-            }]);
-            $coupons = $query->get();
-        
-            // Optionally transform the result if needed
-            return $coupons;
-        }
-        
-
         public function save ( $request ): mixed {
             $start_date = date ( 'Y-m-d', strtotime ( $request -> input ( 'start-date' ) ) );
             $end_date   = date ( 'Y-m-d', strtotime ( $request -> input ( 'end-date' ) ) );

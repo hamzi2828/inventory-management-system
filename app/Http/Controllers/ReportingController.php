@@ -11,7 +11,6 @@
     use App\Http\Services\ProductService;
     use App\Http\Services\ReportingService;
     use App\Http\Services\UserService;
-    use App\Http\Services\CouponService;
     use App\Http\Services\VendorService;
     use App\Models\Account;
     use App\Models\Category;
@@ -314,49 +313,6 @@
             $data[ 'customers' ] = ( new CustomerService() ) -> all ();
             $data[ 'sales' ]     = ( new ReportingService() ) -> sale_analysis_report ();
             return view ( 'reporting.sale-analysis-report', $data );
-        }
-        
-       // ReportingController.php
-
-        public function coupon_report()
-        {
-            $this->authorize('couponReport', User::class);
-            $data['title'] = 'Coupon Usage Report';
-            $data['coupons'] = (new CouponService())->all();
-            $data['coupons_report'] = (new CouponService())->coupon_report();
-
-            // dd($data['coupons_report']);
-
-            return view('reporting.coupon-report', $data);
-        }
-
-        public function coupon_search_report(Request $request)
-        {
-            $this -> authorize ( 'couponReport', User::class );
-            
-            $request->validate([
-                'coupon-id' => 'nullable|exists:coupons,id',
-                'start-date' => 'nullable|date',
-                'end-date' => 'nullable|date|after_or_equal:start-date',
-            ]);
-            // Get search parameters
-            $couponId = $request->input('coupon-id');
-            $startDate = $request->input('start-date');
-            $endDate = $request->input('end-date');
-        
-            // Fetch the coupons
-            $coupons = (new CouponService())->all();
-            
-            // Fetch the filtered coupon reports
-            $couponsReport = (new CouponService())->coupon_search_report($couponId, $startDate, $endDate);
-        
-            $data['title'] = 'Coupon Usage Report';
-            $data['coupons'] = $coupons;
-            $data['coupons_report'] = $couponsReport;
-            
-       
-            // Return view with data
-            return view('reporting.coupon-report', $data);
         }
         
     }
