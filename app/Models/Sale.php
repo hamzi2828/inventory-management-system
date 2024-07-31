@@ -16,6 +16,8 @@
         public function logs () {
             return $this -> morphMany ( Log::class, 'logable' );
         }
+    
+
         
         public function customer () {
             return $this -> belongsTo ( Customer::class );

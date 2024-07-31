@@ -171,6 +171,14 @@
                           data-i18n="Balance Sheet">Price List Catalog</span>
                 </a>
             </li>
+
+            <li class="{{ request () -> routeIs ('coupon-genral-report') ? 'active' : '' }}">
+                <a class="d-flex align-items-center" href="{{ route ('coupon-genral-report') }}">
+                    <i data-feather="circle"></i>
+                    <span class="menu-item text-truncate d-full-text"
+                          data-i18n="Coupon Genral Report">Coupon Genral Report</span>
+                </a>
+            </li>
         </ul>
     </li>
 @endcan
