@@ -84,10 +84,11 @@
                                    
                                         <tbody>
                                             @if(count($coupons_report) > 0)
-                                                @foreach($coupons_report as $index => $coupon)
+                                                @php $outerIndex = 1; @endphp
+                                                @foreach($coupons_report as $coupon)
                                                     @foreach($coupon['sales'] as $sale)
                                                         <tr>
-                                                            <td>{{ $index + 1 }}</td>
+                                                            <td>{{ $outerIndex++ }}</td>
                                                             <td>{{ $sale['sale_id'] }}</td>
                                                             <td>{{ $coupon['code'] }}</td>
                                                             <td>{{ $sale['created_at'] }}</td>
@@ -101,6 +102,7 @@
                                                 </tr>
                                             @endif
                                         </tbody>
+                                        
                                         
                                         {{-- <tfoot>
                                         <tr>
