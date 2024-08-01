@@ -177,7 +177,7 @@
                 <a class="d-flex align-items-center" href="{{ route ('coupon-genral-report') }}">
                     <i data-feather="circle"></i>
                     <span class="menu-item text-truncate d-full-text"
-                          data-i18n="Coupon Genral Report">Coupon Genral Report</span>
+                          data-i18n="Coupon Genral Report">Coupon Report</span>
                 </a>
             </li>
             @endcan
