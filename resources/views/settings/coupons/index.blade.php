@@ -37,8 +37,8 @@
                                                     <td>{{ number_format ($coupon -> discount, 2) }}</td>
                                                     <th>{{ $coupon -> use_frequency }}</th>
                                                     <th>{{ $coupon -> used_frequency }}</th>
-                                                    <td>{{ $coupon -> start_date }}</td>
-                                                    <td>{{ $coupon -> end_date }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($coupon['start_date'])->format('d/m/Y') }}</td>
+                                                    <td>{{ \Carbon\Carbon::parse($coupon['end_date'])->format('d/m/Y') }}</td>
                                                     <th style="font-weight: normal;">{{ $coupon->status }}</th>
                                                     <td class="w-100">
                                                         <div class="align-content-start d-flex justify-content-start flex-column ">

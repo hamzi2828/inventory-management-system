@@ -14,7 +14,6 @@
                                 <div class="card-header">
                                     <h4 class="card-title">{{ $title }}</h4>
                                 </div>
-                               <div class="card-body">
                                 <div class="card-body">
                                     <form method="get" action="{{ route('coupon-search-report') }}" id="general-sales-report">
                                         <div class="row">
@@ -25,7 +24,7 @@
                                                     @if(count($coupons) > 0)
                                                         @foreach($coupons as $coupon)
                                                             <option value="{{ $coupon->id }}" {{ $coupon->id == request('coupon-id') ? 'selected' : '' }}>
-                                                                {{ $coupon->code }} - {{ $coupon->description }}
+                                                                {{ $coupon->code }} 
                                                             </option>
                                                         @endforeach
                                                     @endif
@@ -54,34 +53,31 @@
                                         </div>
                                     </form>
                                 </div>
-                                
-                                </div>
 
-                                {{-- @if(count ($sales) > 0)
+                                @if(count($coupons_report) > 0)
                                     <div class="row">
-                                        <div class="col-md-12 d-flex justify-content-end">
-                                            <a href="{{ route ('general-sales-invoice', ['customer-id' => request ('customer-id'), 'user-id' => request ('user-id'), 'branch-id' => request ('branch-id'), 'start-date' => request ('start-date'), 'end-date' => request ('end-date')]) }}"
-                                               target="_blank"
-                                               class="btn btn-dark me-2 mb-1 btn-sm">
-                                                <i data-feather="printer"></i> Print
-                                            </a>
+                                        <div class="col-md-12">
+                                            <div class="d-flex gap-1 justify-content-end pt-1 pb-1">
+                                                <a href="javascript:void(0)" class="btn btn-primary rounded btn-sm" onclick="downloadExcel('Coupon Report')">
+                                                    <i data-feather='download-cloud'></i>
+                                                    Download Excel
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
-                                @endif --}}
+                                @endif 
 
                                 <div class="table-responsive">
-                                    <table class="table w-100 table-hover table-responsive table-striped">
+                                    <table id="excel-table" class="table w-100 table-hover table-responsive table-striped">
                                         <thead>
                                         <tr>
                                             <th>#</th>
-                                            <th>Sale ID</th>
-                                            <th>Copoun Code</th>
-                                            <th>Date Created  </th>
+                                            <th>Coupon Code</th>
+                                            <th>Order Number</th>
+                                            <th>Date Created</th>
                                             <th>User</th>
-                                          
                                         </tr>
                                         </thead>
-                                   
                                         <tbody>
                                             @if(count($coupons_report) > 0)
                                                 @php $outerIndex = 1; @endphp
@@ -89,9 +85,10 @@
                                                     @foreach($coupon['sales'] as $sale)
                                                         <tr>
                                                             <td>{{ $outerIndex++ }}</td>
-                                                            <td>{{ $sale['sale_id'] }}</td>
                                                             <td>{{ $coupon['code'] }}</td>
-                                                            <td>{{ $sale['created_at'] }}</td>
+                                                            <td>{{ $sale['sale_id'] }}</td>
+                                                            <td>{{ \Carbon\Carbon::parse($sale['created_at'])->format('d/m/Y') }}</td>
+
                                                             <td>{{ isset($sale['user']['name']) ? $sale['user']['name'] : 'N/A' }}</td>
                                                         </tr>
                                                     @endforeach
@@ -102,21 +99,6 @@
                                                 </tr>
                                             @endif
                                         </tbody>
-                                        
-                                        
-                                        {{-- <tfoot>
-                                        <tr>
-                                            <td colspan="3"></td>
-                                            <td align="left">
-                                                <strong>{{ number_format ($totalPrice, 2) }}</strong>
-                                            </td>
-                                            <td></td>
-                                            <td></td>
-                                            <td align="left">
-                                                <strong>{{ number_format ($totalNetPrice, 2) }}</strong>
-                                            </td>
-                                        </tr>
-                                        </tfoot> --}}
                                     </table>
                                 </div>
                             </div>
@@ -127,4 +109,43 @@
             </div>
         </div>
     </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.0/xlsx.full.min.js"></script>
+    <script>
+        function downloadExcel(title) {
+            // Get the HTML table
+            let table = document.getElementById("excel-table");
+
+            // Convert the table to a sheet object
+            let sheet = XLSX.utils.table_to_sheet(table);
+
+            // Create a workbook object
+            let workbook = XLSX.utils.book_new();
+
+            // Add the sheet to the workbook
+            XLSX.utils.book_append_sheet(workbook, sheet, "Sheet1");
+
+            // Convert the workbook to a binary string
+            let wbout = XLSX.write(workbook, { bookType: "xlsx", type: "binary" });
+
+            // Create a Blob object from the binary string
+            let blob = new Blob([s2ab(wbout)], { type: "application/octet-stream" });
+
+            // Create a download link and click it
+            let url = window.URL.createObjectURL(blob);
+            let a = document.createElement("a");
+            a.href = url;
+            a.download = title + ".xlsx";
+            a.click();
+            window.URL.revokeObjectURL(url);
+        }
+
+        function s2ab(s) {
+            var buf = new ArrayBuffer(s.length);
+            var view = new Uint8Array(buf);
+            for (var i = 0; i < s.length; i++) {
+                view[i] = s.charCodeAt(i) & 0xFF;
+            }
+            return buf;
+        }
+    </script>
 </x-dashboard>
