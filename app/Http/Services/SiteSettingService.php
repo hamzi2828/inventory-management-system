@@ -54,6 +54,7 @@
                 'display_out_of_stock_products' => $request -> input ( 'display-out-of-stock-products' ),
                 'display_top_categories'        => $request -> input ( 'display-top-categories' ),
                 'currency'                      => $request->input('currency'),
+                'reviews_enable_with_login'     => $request->input('reviews_enable_with_login'),
 
             ];
             

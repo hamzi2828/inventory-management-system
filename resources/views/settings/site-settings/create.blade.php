@@ -19,26 +19,43 @@
                                         <div class="row">
                                             <div class="col-md-10 mb-1">
                                                 <div class="row">
-                                                    <div class="col-md-4 mb-1">
+                                                    <div class="col-md-3 mb-1">
                                                         <label class="col-form-label font-small-4">Title</label>
                                                         <input type="text" class="form-control" autofocus="autofocus"
                                                                name="title" placeholder="Title"
                                                                value="{{ old ('title', optional($settings -> settings) ?-> title) }}" />
                                                     </div>
                                                     
-                                                    <div class="col-md-4 mb-1">
+                                                    <div class="col-md-3 mb-1">
                                                         <label class="col-form-label font-small-4">Email</label>
                                                         <input type="email" class="form-control"
                                                                name="email" placeholder="Email"
                                                                value="{{ old ('email', optional($settings -> settings) ?-> email) }}" />
                                                     </div>
                                                     
-                                                    <div class="col-md-4 mb-1">
+                                                    <div class="col-md-3 mb-1">
                                                         <label class="col-form-label font-small-4">Phone</label>
                                                         <input type="text" class="form-control"
                                                                name="phone" placeholder="Phone"
                                                                value="{{ old ('phone', optional($settings -> settings) ?-> phone) }}" />
                                                     </div>
+
+                                                    <div class="col-md-3 mb-1">
+                                                        <label class="col-form-label font-small-4">
+                                                            Reviews Enable Without Login
+                                                        </label>
+                                                        <select name="reviews_enable_with_login" class="form-control">
+                                                            <option value="0" @selected(old('reviews_enable_with_login', optional($settings->settings)->reviews_enable_with_login) == '0')>
+                                                                No
+                                                            </option>
+                                                            <option value="1" @selected(old('reviews_enable_with_login', optional($settings->settings)->reviews_enable_with_login) == '1')>
+                                                                Yes
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    
+
+
                                                 </div>
                                                 
                                                 <div class="row">

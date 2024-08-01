@@ -22,6 +22,7 @@
         
         public function store ( Request $request ) {
             $this -> authorize ( 'create', SiteSettings::class );
+
             try {
                 DB ::beginTransaction ();
                 ( new SiteSettingService() ) -> save ( $request );
