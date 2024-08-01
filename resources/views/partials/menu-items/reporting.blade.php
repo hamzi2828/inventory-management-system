@@ -171,6 +171,7 @@
                           data-i18n="Balance Sheet">Price List Catalog</span>
                 </a>
             </li>
+            @can('couponReport', \App\Models\User::class)
 
             <li class="{{ request () -> routeIs ('coupon-genral-report') ? 'active' : '' }}">
                 <a class="d-flex align-items-center" href="{{ route ('coupon-genral-report') }}">
@@ -179,6 +180,7 @@
                           data-i18n="Coupon Genral Report">Coupon Genral Report</span>
                 </a>
             </li>
+            @endcan
         </ul>
     </li>
 @endcan

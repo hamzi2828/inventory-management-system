@@ -59,7 +59,7 @@
                                             <div class="col-md-3 mb-1">
                                                 <label class="col-form-label font-small-4"
                                                        for="use-frequency">Use Frequency</label>
-                                                <input type="text" id="use-frequency" class="form-control"
+                                                <input type="number" id="use-frequency" class="form-control"
                                                        required="required" name="use-frequency" value="{{ old ('use-frequency') }}" />
                                             </div>
                                             
