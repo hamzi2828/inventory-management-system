@@ -222,7 +222,7 @@
 <tr>
     <td></td>
     <td>
-        <h5 class="mb-0">Coupon General Report</h5>
+        <h5 class="mb-0">Coupon Report</h5>
     </td>
     <td>
         <div class="form-check form-check-success">
