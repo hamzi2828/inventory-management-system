@@ -5,7 +5,7 @@
         <div class="content-wrapper p-0">
             <div class="content-header row"></div>
             <div class="content-body">
-                <!-- Basic table -->
+                <!-- Basic table --> 
                 <section id="basic-datatable">
                     <div class="row">
                         <div class="col-md-12">
@@ -66,8 +66,20 @@
                                                     </td>
                                                     <td>{{ $review -> product -> sku }}</td>
                                                     <td>{{ $review -> product -> productTitle() }}</td>
-                                                    <td>{{ $review -> user ?-> name }}</td>
-                                                    <td>{{ $review -> user ?-> email }}</td>
+                                                    <td> 
+                                                        @if ($review->user_id)
+                                                            {{ $review -> user ?-> name }}
+                                                            @else
+                                                            {{ $review->user_name }}
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        @if ($review->user_id)
+                                                            {{ $review -> user ?-> email }}
+                                                            @else
+                                                            {{ $review->email }}
+                                                        @endif
+                                                    </td>
                                                     <td>{{ $review -> user ?-> phone }}</td>
                                                     <td>{{ $review -> rating }}</td>
                                                     <td>{{ $review -> review }}</td>

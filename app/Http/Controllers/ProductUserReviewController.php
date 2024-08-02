@@ -9,12 +9,14 @@
     use Illuminate\Http\Request;
     use Illuminate\Support\Facades\DB;
     use Illuminate\Support\Facades\Log;
-    
+     
     class ProductUserReviewController extends Controller {
         
         public function index (): View {
             $data[ 'title' ]   = 'Products Reviews';
             $data[ 'reviews' ] = ProductUserReview ::with ( [ 'product', 'user' ] ) -> latest () -> get ();
+
+            // dd( $data[ 'reviews' ]);
             return view ( 'products.reviews', $data );
         }
         
