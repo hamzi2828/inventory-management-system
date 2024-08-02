@@ -291,6 +291,9 @@
         Route ::group ( [ 'prefix' => 'products' ], function () {
             Route ::resource ( 'reviews', ProductUserReviewController::class );
         } );
+
+        Route::post('edit-reviews/{id}', [ProductUserReviewController::class, 'edit_review'])->name('edit-reviews');
+
         
         Route ::get ( 'stock-takes/create-category', [
             StockTakeController::class,

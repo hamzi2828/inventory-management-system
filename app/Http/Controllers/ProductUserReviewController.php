@@ -64,4 +64,29 @@
                 return redirect () -> back () -> with ( 'error', $exception -> getMessage () ) -> withInput ();
             }
         }
+
+        public function edit_review(Request $request, $id)
+        {
+
+            
+            $request->validate([
+               'rating' => 'required|integer|min:1|max:5',
+                'review' => 'required|string',
+            ]);
+        
+            // Find the review
+            $review = ProductUserReview::findOrFail($id);
+        
+            // Update review
+            $review->update([
+                'rating' => $request->input('rating'),
+                'review' => $request->input('review'),
+
+            ]);
+        
+            // Redirect back with success message
+            return redirect()->back()->with('success', 'Review updated successfully.');
+        }
+        
+
     }
