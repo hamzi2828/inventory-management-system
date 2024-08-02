@@ -85,9 +85,9 @@
                                                     <td>{{ $review -> review }}</td>
                                                     <td>
                                                         @if($review -> active == '1')
-                                                            <span class="badge bg-success">Active</span>
+                                                            <span class="badge bg-success">Approved</span>
                                                         @else
-                                                            <span class="badge bg-warning">Inactive</span>
+                                                            <span class="badge bg-warning">Disapprove</span>
                                                         @endif
                                                     </td>
                                                 </tr>
