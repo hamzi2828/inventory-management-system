@@ -534,4 +534,18 @@
             else
                 return false;
         }
+
+        public function deletereview ( User $user ) {
+            if ( in_array ( 'review-delete-privilege', $user -> permissions () ) )
+                return true;
+            else
+                return false;
+        }
+
+        public function approve_disapprove ( User $user ) {
+            if ( in_array ( 'approve-disapprove-review-privilege', $user -> permissions () ) )
+                return true;
+            else
+                return false;
+        }
     }

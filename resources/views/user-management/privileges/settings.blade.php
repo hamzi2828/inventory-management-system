@@ -21,3 +21,6 @@
 @include('user-management.privileges.coupons', ['permission' => $permission])
 @include('user-management.privileges.site-settings', ['permission' => $permission])
 @include('user-management.privileges.home-settings', ['permission' => $permission])
+@include('user-management.privileges.review-settings', ['permission' => $permission])
+
+ 

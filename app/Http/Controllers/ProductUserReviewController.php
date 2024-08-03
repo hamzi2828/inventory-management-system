@@ -34,6 +34,7 @@
         
         public function update ( ProductUserReviewFormRequest $request, ProductUserReview $review ) {
             try {
+                $this->authorize('approve_disapprove', User::class);
                 DB ::beginTransaction ();
                 $review -> active = $review -> active == '0' ? '1' : '0';
                 $review -> update ();
@@ -51,6 +52,8 @@
         
         public function destroy ( ProductUserReview $review ) {
             try {
+                $this->authorize('deletereview', User::class);
+
                 DB ::beginTransaction ();
                 $review -> delete ();
                 DB ::commit ();

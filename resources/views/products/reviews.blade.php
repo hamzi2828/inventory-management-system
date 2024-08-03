@@ -33,6 +33,7 @@
                                                 <tr>
                                                     <td align="center">{{ $loop -> iteration }}</td>
                                                     <td>
+                                                        @can('approve_disapprove', \App\Models\User::class)
                                                         <form method="post" class="mb-1"
                                                               id="confirmation-dialog-{{ $review -> id }}"
                                                               action="{{ route ('reviews.update', ['review' => $review -> id]) }}">
@@ -44,6 +45,7 @@
                                                                 Approve/Disapprove
                                                             </button>
                                                         </form>
+                                                         @endcan
                                                         
                                                         @can('reviewedit', \App\Models\User::class)
                                                         <button type="button"
@@ -52,7 +54,7 @@
                                                             Edit
                                                         </button>
                                                          @endcan
-
+                                                         @can('deletereview', \App\Models\User::class)
                                                         <form method="post"
                                                               id="delete-confirmation-dialog-{{ $review -> id }}"
                                                               action="{{ route ('reviews.destroy', ['review' => $review -> id]) }}">
@@ -64,6 +66,7 @@
                                                                 Delete
                                                             </button>
                                                         </form>
+                                                         @endcan
                                                     </td>
                                                     <td>
                                                         @if(!empty(trim ($review -> product ?-> image)))
