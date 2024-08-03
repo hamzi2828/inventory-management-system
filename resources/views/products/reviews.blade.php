@@ -131,8 +131,14 @@
                         <input type="hidden" name="review_id" id="review_id">
                         <div class="mb-3">
                             <label for="edit_rating" class="form-label">Rating</label>
-                            <input type="number" class="form-control" id="edit_rating" name="rating" min="1" max="5" required>
+                            <select class="form-control" id="edit_rating" name="rating" required>
+                                <option value="" disabled selected>Select a rating</option>
+                                @for ($i = 1; $i <= 5; $i++)
+                                    <option value="{{ $i }}">{{ $i }}</option>
+                                @endfor
+                            </select>
                         </div>
+                        
                         <div class="mb-3">
                             <label for="edit_review" class="form-label">Review</label>
                             <textarea class="form-control" id="edit_review" name="review" rows="3" required></textarea>
