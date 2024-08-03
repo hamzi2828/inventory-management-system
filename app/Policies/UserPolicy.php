@@ -548,4 +548,11 @@
             else
                 return false;
         }
+
+        public function reviews_sidebar ( User $user ) {
+            if ( in_array ( 'reviews-privilege', $user -> permissions () ) )
+                return true;
+            else
+                return false;
+        }
     }

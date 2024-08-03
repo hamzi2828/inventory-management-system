@@ -23,12 +23,7 @@
                 </li>
             @endcan
             
-            <li class="{{ request () -> routeIs ('reviews.index') ? 'active' : '' }}">
-                <a class="d-flex align-items-center" href="{{ route ('reviews.index') }}">
-                    <i data-feather="circle"></i>
-                    <span class="menu-item text-truncate" data-i18n="Products Reviews">Products Reviews</span>
-                </a>
-            </li>
+         
             
             @can('create', \App\Models\Product::class)
                 <li class="{{ request () -> routeIs ('products.create') ? 'active' : '' }}">
@@ -135,4 +130,21 @@
             @endcan
         </ul>
     </li>
+@endcan
+
+@can('reviews_sidebar', \App\Models\User::class)
+<li class="nav-item has-sub {{ request()->routeIs('reviews.index') ? 'open' : '' }}">
+    <a class="d-flex align-items-center" href="javascript:void(0)">
+        <i data-feather='star'></i>
+        <span class="menu-title text-truncate" data-i18n="Products Reviews">Products Reviews</span>
+    </a>
+    <ul class="menu-content">  
+        <li class="{{ request()->routeIs('reviews.index') ? 'active' : '' }}">
+            <a class="d-flex align-items-center" href="{{ route('reviews.index') }}">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Products Reviews">Products Reviews</span>
+            </a>
+        </li>
+    </ul>
+</li>
 @endcan
