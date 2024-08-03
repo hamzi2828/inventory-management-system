@@ -68,7 +68,8 @@
         public function edit_review(Request $request, $id)
         {
 
-            
+            $this->authorize('reviewedit', User::class);
+
             $request->validate([
                'rating' => 'required|integer|min:1|max:5',
                 'review' => 'required|string',

@@ -24,7 +24,7 @@
                                                        required="required" autofocus="autofocus"
                                                        name="title" placeholder="Title"
                                                        value="{{ old ('title') }}"/>
-                                            </div>
+                                            </div> 
                                         </div>
 
                                         @include('user-management.roles.privileges', ['permission' => ''])
@@ -39,6 +39,6 @@
                     </div>
                 </section>
             </div>
-        </div>
+        </div> 
     </div>
 </x-dashboard>

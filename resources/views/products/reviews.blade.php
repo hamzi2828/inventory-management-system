@@ -45,13 +45,13 @@
                                                             </button>
                                                         </form>
                                                         
-                                                         
+                                                        @can('reviewedit', \App\Models\User::class)
                                                         <button type="button"
                                                                 onclick="openEditReviewModal({{ $review->id }}, '{{ $review->rating }}', '{{ $review->review }}', '{{ $review->user_name }}', '{{ $review->email }}')"
                                                                 class="btn btn-primary btn-sm d-block w-100 mb-1">
                                                             Edit
                                                         </button>
-                                            
+                                                         @endcan
 
                                                         <form method="post"
                                                               id="delete-confirmation-dialog-{{ $review -> id }}"

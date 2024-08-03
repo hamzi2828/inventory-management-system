@@ -527,4 +527,11 @@
             else
                 return false;
         }
+
+        public function reviewedit ( User $user ) {
+            if ( in_array ( 'review-edit-privilege', $user -> permissions () ) )
+                return true;
+            else
+                return false;
+        }
     }

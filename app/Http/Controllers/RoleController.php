@@ -58,7 +58,7 @@
         
         public function store ( RoleRequest $request ) {
             $this -> authorize ( 'create', Role::class );
-            try {
+            try { 
                 DB ::beginTransaction ();
                 $role = $this -> roleService -> save ( $request );
                 $this -> permissionService -> save ( $request, $role -> id );
