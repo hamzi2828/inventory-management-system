@@ -30,13 +30,13 @@
 
 <tr>
     <td colspan="2">
-        <h5 class="mb-0">Reviews</h5>
+        <h5 class="mb-0">Product Reviews</h5>
     </td>
     <td>
         <div class="form-check form-check-success">
             <input type="checkbox" class="form-check-input" name="privilege[]"
                    value="reviews-privilege" @checked(!empty($permission) && in_array ('reviews-privilege', $permission -> permission))>
-            <label class="form-check-label">Product Reviews</label>
+            <label class="form-check-label">Reviews</label>
         </div>
     </td>
 </tr>

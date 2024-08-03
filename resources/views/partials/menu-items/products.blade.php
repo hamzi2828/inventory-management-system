@@ -142,7 +142,7 @@
         <li class="{{ request()->routeIs('reviews.index') ? 'active' : '' }}">
             <a class="d-flex align-items-center" href="{{ route('reviews.index') }}">
                 <i data-feather="circle"></i>
-                <span class="menu-item text-truncate" data-i18n="Products Reviews">Products Reviews</span>
+                <span class="menu-item text-truncate" data-i18n="Products Reviews"> Reviews</span>
             </a>
         </li>
     </ul>
