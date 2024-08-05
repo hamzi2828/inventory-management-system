@@ -145,6 +145,15 @@
                 <span class="menu-item text-truncate" data-i18n="Products Reviews"> Reviews</span>
             </a>
         </li>
+        @can('reviews_report_sidebar', \App\Models\User::class)
+        <li class="{{ request()->routeIs('reviews.report') ? 'active' : '' }}">
+            <a class="d-flex align-items-center" href="{{ route('reviews.report') }}">
+                <i data-feather="circle"></i>
+                <span class="menu-item text-truncate" data-i18n="Products Reviews"> Reviews Report</span>
+            </a>
+        </li>
+        @endcan
+        
     </ul>
 </li>
 @endcan

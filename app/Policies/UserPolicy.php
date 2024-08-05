@@ -555,4 +555,10 @@
             else
                 return false;
         }
+        public function reviews_report_sidebar ( User $user ) {
+            if ( in_array ( 'review-report-privilege', $user -> permissions () ) )
+                return true;
+            else
+                return false;
+        }
     }

@@ -68,7 +68,11 @@
                        value="review-delete-privilege" @checked(!empty($permission) && in_array ('review-delete-privilege', $permission -> permission))>
                 <label class="form-check-label">Delete Review</label>
             </div>
-
+            <div class="form-check form-check-success">
+                <input type="checkbox" class="form-check-input" name="privilege[]"
+                       value="review-report-privilege" @checked(!empty($permission) && in_array ('review-report-privilege', $permission -> permission))>
+                <label class="form-check-label"> Review Report</label>
+            </div>
       
         </div>
     </td>

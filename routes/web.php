@@ -291,8 +291,10 @@
         Route ::group ( [ 'prefix' => 'products' ], function () {
             Route ::resource ( 'reviews', ProductUserReviewController::class );
         } );
-
+        Route ::get ( 'reviews/report', [ProductUserReviewController::class, 'reviews_report'])->name('reviews.report');
         Route::post('edit-reviews/{id}', [ProductUserReviewController::class, 'edit_review'])->name('edit-reviews');
+        Route ::get ('/review-search-report', [ProductUserReviewController::class, 'review_search_report'])->name('review-search-report');
+
 
         
         Route ::get ( 'stock-takes/create-category', [

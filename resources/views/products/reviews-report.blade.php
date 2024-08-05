@@ -10,14 +10,100 @@
                     <div class="row">
                         <div class="col-md-12">
                             <div class="card">
+
+                                <div class="card-header">
+                                    <h4 class="card-title">{{ $title }}</h4>
+                                </div>
+                                <div class="card-body">
+                                    <form method="get" action="{{ route('review-search-report') }}" id="review-report">
+                                        <div class="row">
+                                            
+                                            <div class="form-group col-md-6 mb-1">
+                                                <label class="mb-50">Products</label>
+                                                <select name="product-id" class="form-control select2" data-placeholder="Select">
+                                                    <option></option>
+                                                    @if(count($products) > 0)
+                                                        @foreach($products as $product)
+                                                            <option value="{{ $product->id }}">
+                                                                ({{ $product->barcode }}) ({{ $product->sku }}) 
+                                                                ({{ $product->title }})
+                                                            </option>
+                                                        @endforeach
+                                                    @endif
+                                                </select>
+                                                @error('product-id')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            
+                                            <div class="form-group col-md-3 mb-1">
+                                                <label class="mb-25">Start Date</label>
+                                                <input type="text" class="form-control flatpickr-basic" name="start-date" value="{{ request('start-date') }}">
+                                                @error('start-date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            <div class="form-group col-md-3 mb-1">
+                                                <label class="mb-25">End Date</label>
+                                                <input type="text" class="form-control flatpickr-basic" name="end-date" value="{{ request('end-date') }}">
+                                                @error('end-date')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+
+                                            <div class="form-group col-md-3 mb-1">
+                                                <label class="mb-25">Rating</label>
+                                                <select name="rating[]" class="form-control select2" multiple="multiple">
+                                                    @for ($i = 1; $i <= 5; $i++)
+                                                        <option value="{{ $i }}" {{ in_array($i, (array) request('rating')) ? 'selected' : '' }}>
+                                                            {{ $i }}
+                                                        </option>
+                                                    @endfor
+                                                </select>
+                                                @error('rating')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                            
+                                            <script>
+                                            $(document).ready(function() {
+                                                $('.select2').select2({
+                                                    placeholder: "Select ratings",
+                                                    allowClear: true
+                                                });
+                                            });
+                                            </script>
+                                            
+                                            
+
+                                            <div class="form-group col-md-2 mb-1">
+                                                <button type="submit" class="btn w-100 mt-2 btn-primary d-block ps-0 pe-0">Search</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+
+                                @if(count($reviews) > 0)
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="d-flex gap-1 justify-content-end pt-1 pb-1">
+                                            <a href="javascript:void(0)" class="btn btn-primary rounded btn-sm" onclick="downloadExcel('Review Report')">
+                                                <i data-feather='download-cloud'></i>
+                                                Download Excel
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endif 
+
+
                                 <div class="table-responsive">
                                     <table class="table w-100 table-striped table-responsive" id="excel-table">
                                         <thead>
                                         <tr>
                                             <th>Sr.No</th>
-                                            <th>Actions</th>
                                             <th>Image</th>
-                                            <th>Status</th>
                                             <th>Sku</th>
                                             <th>Product</th>
                                             <th>User Name</th>
@@ -32,42 +118,7 @@
                                             @foreach($reviews as $review)
                                                 <tr>
                                                     <td align="center">{{ $loop -> iteration }}</td>
-                                                    <td>
-                                                        @can('approve_disapprove', \App\Models\User::class)
-                                                        <form method="post" class="mb-1"
-                                                              id="confirmation-dialog-{{ $review -> id }}"
-                                                              action="{{ route ('reviews.update', ['review' => $review -> id]) }}">
-                                                            @method('PUT')
-                                                            @csrf
-                                                            <button type="button"
-                                                                    onclick="confirm_dialog('{{ $review -> id }}')"
-                                                                    class="btn btn-success btn-sm d-block w-100">
-                                                                Approve/Disapprove
-                                                            </button>
-                                                        </form>
-                                                         @endcan
-                                                        
-                                                        @can('reviewedit', \App\Models\User::class)
-                                                        <button type="button"
-                                                                onclick="openEditReviewModal({{ $review->id }}, '{{ $review->rating }}', '{{ $review->review }}', '{{ $review->user_name }}', '{{ $review->email }}')"
-                                                                class="btn btn-primary btn-sm d-block w-100 mb-1">
-                                                            Edit
-                                                        </button>
-                                                         @endcan
-                                                         @can('deletereview', \App\Models\User::class)
-                                                        <form method="post"
-                                                              id="delete-confirmation-dialog-{{ $review -> id }}"
-                                                              action="{{ route ('reviews.destroy', ['review' => $review -> id]) }}">
-                                                            @method('DELETE')
-                                                            @csrf
-                                                            <button type="button"
-                                                                    onclick="delete_dialog({{ $review -> id }})"
-                                                                    class="btn btn-danger btn-sm d-block w-100">
-                                                                Delete
-                                                            </button>
-                                                        </form>
-                                                         @endcan
-                                                    </td>
+                                                
                                                     <td>
                                                         @if(!empty(trim ($review -> product ?-> image)))
                                                             <div class="avatar avatar-lg">
@@ -75,13 +126,7 @@
                                                             </div>
                                                         @endif
                                                     </td>
-                                                    <td>
-                                                        @if($review -> active == '1')
-                                                            <span class="badge bg-success">Approved</span>
-                                                        @else
-                                                            <span class="badge bg-warning">Disapprove</span>
-                                                        @endif
-                                                    </td>
+                                               
                                                     <td>{{ $review -> product -> sku }}</td>
                                                     <td>{{ $review -> product -> productTitle() }}</td>
                                                     <td> 
