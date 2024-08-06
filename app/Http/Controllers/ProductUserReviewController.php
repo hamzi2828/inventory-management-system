@@ -107,8 +107,12 @@
                 ->get();
             
             // Fetch all products
-            $data['products'] = Product::all();
+            // $data['products'] = Product::all();
 
+            $data['products'] = Product::whereHas('reviews', function ($query) {
+                $query->where('active', '1');
+            })->get();
+        
             
             
             return view('products.reviews-report', $data);

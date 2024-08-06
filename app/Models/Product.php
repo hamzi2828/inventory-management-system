@@ -375,4 +375,10 @@
         public function product_variations (): HasMany {
             return $this -> hasMany ( ProductVariation::class );
         }
+
+        public function reviews()
+            {
+                return $this->hasMany(ProductUserReview::class);
+            }
+
     }
