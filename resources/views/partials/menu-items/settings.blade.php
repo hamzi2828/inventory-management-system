@@ -274,7 +274,16 @@
                               data-i18n="Home Page Settings">Home Page Settings</span>
                     </a>
                 </li>
+
+                <li class="{{ request()->routeIs('home-settings.newsletter_email') ? 'active' : '' }}">
+                    <a class="d-flex align-items-center" href="{{ route('home-settings.newsletter_email') }}">
+                        <i data-feather="mail"></i> <!-- Updated icon -->
+                        <span class="menu-item text-truncate" data-i18n="News Letter Settings">News Letter Email</span>
+                    </a>
+                </li>
+                
             @endcan
+
         </ul>
     </li>
 @endif

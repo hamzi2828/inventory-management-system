@@ -4,6 +4,8 @@
     
     use App\Http\Services\HomeSettingService;
     use App\Models\HomeSetting;
+    use App\Models\Newsletter;
+
     use Illuminate\Contracts\View\View;
     use Illuminate\Database\QueryException;
     use Illuminate\Http\Request;
@@ -38,6 +40,15 @@
                 return redirect () -> back () -> with ( 'error', $exception -> getMessage () ) -> withInput ();
             }
         }
+
+        public function newsletter_email()
+        {
+            $data['title']    = 'Newsletter Settings';
+            $data['settings'] = Newsletter::all();
+        
+            return view('settings.home-settings.newsletter', $data);
+        }
+        
         
         public function show ( $id ) {
             //

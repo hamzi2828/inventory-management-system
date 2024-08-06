@@ -171,6 +171,7 @@
             Route ::resource ( 'couriers', CourierController::class ) -> except ( [ 'show' ] );
             Route ::resource ( 'coupons', CouponController::class ) -> except ( [ 'show' ] );
         } );
+        Route ::get('/home-settings/newsletter_email', [HomeSettingController::class, 'newsletter_email'])->name('home-settings.newsletter_email');
         
         Route::patch('/coupons/{coupon}/status', [CouponController::class, 'updateStatus'])->name('coupons.status');
 
