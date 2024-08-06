@@ -10,33 +10,54 @@
     
     class HomeSettingService {
         
-        public function save ( $request ) {
-            $homeSettings = HomeSetting ::first ();
-            
-            if ( !$homeSettings ) {
-                return HomeSetting ::create ( [
-                                                  'banner_1' => $this -> upload_image ( $request, 'banner-1' ),
-                                                  'banner_2' => $this -> upload_image ( $request, 'banner-2' ),
-                                                  'banner_3' => $this -> upload_image ( $request, 'banner-3' ),
-                                                  'banner_4' => $this -> upload_image ( $request, 'banner-4' ),
-                                              ] );
-            }
-            else {
-                if ( $request -> hasFile ( 'banner-1' ) )
-                    $homeSettings -> banner_1 = $this -> upload_image ( $request, 'banner-1' );
-                
-                if ( $request -> hasFile ( 'banner-2' ) )
-                    $homeSettings -> banner_2 = $this -> upload_image ( $request, 'banner-2' );
-                
-                if ( $request -> hasFile ( 'banner-3' ) )
-                    $homeSettings -> banner_3 = $this -> upload_image ( $request, 'banner-3' );
-                
-                if ( $request -> hasFile ( 'banner-4' ) )
-                    $homeSettings -> banner_4 = $this -> upload_image ( $request, 'banner-4' );
-                
-                $homeSettings -> update ();
+        public function save($request) {
+            // Retrieve the first HomeSetting record or create a new one
+            $homeSettings = HomeSetting::first();
+        
+            // Check if there is no existing HomeSetting record
+            if (!$homeSettings) {
+                $homeSettings = HomeSetting::create([
+                    'banner_1' => $this->upload_image($request, 'banner-1'),
+                    'banner_2' => $this->upload_image($request, 'banner-2'),
+                    'banner_3' => $this->upload_image($request, 'banner-3'),
+                    'banner_4' => $this->upload_image($request, 'banner-4'),
+                    'newsletter_title' => $request->input('newsletter_title'),
+                    'newsletter_subtitle' => $request->input('newsletter_subtitle'),
+                    'newsletter_description' => $request->input('newsletter_description'),
+                    'newsletter_image' => $this->upload_image($request, 'newsletter_image'),
+                ]);
+            } else {
+                // Update existing HomeSetting record
+                if ($request->hasFile('banner-1')) {
+                    $homeSettings->banner_1 = $this->upload_image($request, 'banner-1');
+                }
+        
+                if ($request->hasFile('banner-2')) {
+                    $homeSettings->banner_2 = $this->upload_image($request, 'banner-2');
+                }
+        
+                if ($request->hasFile('banner-3')) {
+                    $homeSettings->banner_3 = $this->upload_image($request, 'banner-3');
+                }
+        
+                if ($request->hasFile('banner-4')) {
+                    $homeSettings->banner_4 = $this->upload_image($request, 'banner-4');
+                }
+        
+                if ($request->hasFile('newsletter_image')) {
+                    $homeSettings->newsletter_image = $this->upload_image($request, 'newsletter_image');
+                }
+        
+                // Update other fields
+                $homeSettings->newsletter_title = $request->input('newsletter_title');
+                $homeSettings->newsletter_subtitle = $request->input('newsletter_subtitle');
+                $homeSettings->newsletter_description = $request->input('newsletter_description');
+        
+                // Save the changes
+                $homeSettings->save();
             }
         }
+        
         
         private function upload_image ( $request, $fileName ): string {
             $savePath = './uploads/hom-settings/banners/';

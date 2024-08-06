@@ -96,6 +96,100 @@
                                             </div>
                                         </div>
                                     </div>
+
+
+                                    
+                               <!-- Newsletter Section -->
+                                  <!-- Newsletter Section -->
+                                  
+                                  <div class="card-body pt-0">
+                                    <h4 class="col-12 mb-3">Newsletter Settings</h4>
+                                    
+                                    <div class="row">
+                                        <!-- Newsletter Title -->
+                                        <div class="col-md-6 mb-1">
+                                            <div class="border rounded p-2">
+                                                <div class="form-group">
+                                                    <label for="newsletter_title">Newsletter Title</label>
+                                                    <input type="text" class="form-control" id="newsletter_title" name="newsletter_title" 
+                                                        value="{{ old('newsletter_title', $settings->newsletter_title ?? '') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Newsletter Subtitle -->
+                                        <div class="col-md-6 mb-1">
+                                            <div class="border rounded p-2">
+                                                <div class="form-group">
+                                                    <label for="newsletter_subtitle">Newsletter Subtitle</label>
+                                                    <input type="text" class="form-control" id="newsletter_subtitle" name="newsletter_subtitle" 
+                                                        value="{{ old('newsletter_subtitle', $settings->newsletter_subtitle ?? '') }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Newsletter Description -->
+                                        <div class="col-md-12 mb-1">
+                                            <div class="border rounded p-2">
+                                                <div class="form-group">
+                                                    <label for="newsletter_description">Newsletter Description</label>
+                                                    <textarea class="form-control" id="newsletter_description" name="newsletter_description">{{ old('newsletter_description', $settings->newsletter_description ?? '') }}</textarea>
+                                                </div>
+                                            </div>
+                                        </div>
+                                
+                                        <!-- Newsletter Image -->
+                                        <div class="col-md-12 mb-1">
+                                            <div class="border rounded p-2">
+                                                <div class="form-group">
+                                                    <label for="newsletter_image">Newsletter Image</label>
+                                                    <input type="file" class="form-control-file" id="newsletter_image" name="newsletter_image" onchange="previewImage(event)">
+                                                    
+                                                    <!-- Display the current image if available -->
+                                                    @if(!empty($settings->newsletter_image))
+                                                        <div class="mt-2">
+                                                            <img src="{{ asset($settings->newsletter_image) }}" alt="Newsletter Image" class="img-fluid" style="max-width: 300px; max-height: 150px;">
+                                                        </div>
+                                                    @endif
+                                                    
+                                                    <!-- Preview for new image -->
+                                                    <div id="newsletter-image-preview" class="mt-2"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <script>
+                                    function previewImage(event) {
+                                        var file = event.target.files[0];
+                                        var previewContainer = document.getElementById('newsletter-image-preview');
+                                    
+                                        // Clear previous previews
+                                        previewContainer.innerHTML = '';
+                                    
+                                        if (file) {
+                                            var reader = new FileReader();
+                                            
+                                            reader.onload = function(e) {
+                                                var img = document.createElement('img');
+                                                img.src = e.target.result;
+                                                img.alt = 'Preview';
+                                                img.className = 'img-fluid';
+                                                img.style.maxWidth = '300px';
+                                                img.style.maxHeight = '150px';
+                                                
+                                                previewContainer.appendChild(img);
+                                            };
+                                            
+                                            reader.readAsDataURL(file);
+                                        }
+                                    }
+                                </script>
+                                
+
+
+
                                     <div class="card-footer">
                                         <button type="submit" class="btn btn-primary me-1">Submit</button>
                                     </div>
