@@ -126,7 +126,50 @@
                                                             </option>
                                                         </select>
                                                     </div>
-                                                    
+
+                                                    <div class="col-md-3 mb-1">
+                                                        <label class="col-form-label font-small-4" for="display-popup">
+                                                            Display Popup
+                                                        </label>
+                                                        <select name="display_popup" class="form-control select2" data-placeholder="Select" required="required" id="display-popup">
+                                                            <option></option>
+                                                            <option value="yes" @selected(optional($settings->settings)->display_popup === 'yes')>
+                                                                Yes
+                                                            </option>
+                                                            <option value="no" @selected(optional($settings->settings)->display_popup === 'no')>
+                                                                No
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3 mb-1">
+                                                        <label class="col-form-label font-small-4" for="display-shop-banner">
+                                                            Display Shop Banner
+                                                        </label>
+                                                        <select name="display_shop_banner" class="form-control select2" data-placeholder="Select" required="required" id="display-shop-banner">
+                                                            <option></option>
+                                                            <option value="yes" @selected(optional($settings->settings)->display_shop_banner === 'yes')>
+                                                                Yes
+                                                            </option>
+                                                            <option value="no" @selected(optional($settings->settings)->display_shop_banner === 'no')>
+                                                                No
+                                                            </option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="col-md-3 mb-1">
+                                                        <label class="col-form-label font-small-4" for="display-shop-categories">
+                                                            Display shop Categories
+                                                        </label>
+                                                        <select name="display_shop_categories" class="form-control select2" data-placeholder="Select" required="required" id="display-shop-categories">
+                                                            <option></option>
+                                                            <option value="yes" @selected(optional($settings->settings)->display_shop_categories === 'yes')>
+                                                                Yes
+                                                            </option>
+                                                            <option value="no" @selected(optional($settings->settings)->display_shop_categories === 'no')>
+                                                                No
+                                                            </option>
+                                                        </select>
+                                                    </div>
+
                                                     <div class="col-md-6 mb-1">
                                                         <label class="col-form-label font-small-4">Address</label>
                                                         <textarea name="address" class="form-control"
@@ -305,6 +348,10 @@
                                                             </option>
                                                         </select>
                                                     </div>
+
+
+                                                  
+                                                    
                                                     
                                                     
                                                 </div>

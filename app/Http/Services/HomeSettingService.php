@@ -11,6 +11,8 @@
     class HomeSettingService {
         
         public function save($request) {
+
+            // dd($request->all());
             // Retrieve the first HomeSetting record or create a new one
             $homeSettings = HomeSetting::first();
         
@@ -25,6 +27,11 @@
                     'newsletter_subtitle' => $request->input('newsletter_subtitle'),
                     'newsletter_description' => $request->input('newsletter_description'),
                     'newsletter_image' => $this->upload_image($request, 'newsletter_image'),
+                    'shop_banner_subtitle' => $request->input('shop_banner_subtitle'),
+                    'shop_banner_title' => $request->input('shop_banner_title'),
+                    'shop_banner_image' => $this->upload_image($request, 'shop_banner_image'),
+                    'shop_banner_link' => $request->input('shop_banner_link'),
+                    'shop_banner_button_text' => $request->input('shop_banner_button_text'),
                 ]);
             } else {
                 // Update existing HomeSetting record
@@ -48,7 +55,15 @@
                     $homeSettings->newsletter_image = $this->upload_image($request, 'newsletter_image');
                 }
         
-                // Update other fields
+                if ($request->hasFile('shop_banner_image')) {
+                    $homeSettings->shop_banner_image = $this->upload_image($request, 'shop_banner_image');
+                }
+        
+                $homeSettings->shop_banner_subtitle = $request->input('shop_banner_subtitle');
+                $homeSettings->shop_banner_title = $request->input('shop_banner_title');
+                $homeSettings->shop_banner_link = $request->input('shop_banner_link');
+                $homeSettings->shop_banner_button_text = $request->input('shop_banner_button_text');
+
                 $homeSettings->newsletter_title = $request->input('newsletter_title');
                 $homeSettings->newsletter_subtitle = $request->input('newsletter_subtitle');
                 $homeSettings->newsletter_description = $request->input('newsletter_description');

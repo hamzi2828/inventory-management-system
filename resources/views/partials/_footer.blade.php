@@ -2,7 +2,7 @@
 <footer class="footer footer-static footer-light">
     <p class="clearfix mb-0">
         <span class="float-md-start d-block d-md-inline-block mt-25">COPYRIGHT  &copy; {{ date ('Y') }}
-            <a class="ms-25" href="#" target="_blank">RAR MultiBiz Services, PVT. LTD</a>
+            <a class="ms-25" href="http://siriustechgrp.com/" target="_blank">Sirius Technologies , PVT. LTD</a>
             <span class="d-none d-sm-inline-block">,
                 All rights Reserved
             </span>

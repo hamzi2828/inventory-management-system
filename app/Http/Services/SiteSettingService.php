@@ -29,6 +29,7 @@
          */
         
         public function save ( $request ) {
+            // dd ( $request -> all () );
             
             $settings     = SiteSettings ::where ( [ 'slug' => 'site-settings' ] ) -> first ();
             $settingsJson = [
@@ -55,6 +56,9 @@
                 'display_top_categories'        => $request -> input ( 'display-top-categories' ),
                 'currency'                      => $request->input('currency'),
                 'reviews_enable_with_login'     => $request->input('reviews_enable_with_login'),
+                'display_popup'                 => $request->input('display_popup'),
+                'display_shop_banner'            => $request->input('display_shop_banner'),
+                'display_shop_categories'        => $request->input('display_shop_categories'),
 
             ];
             
