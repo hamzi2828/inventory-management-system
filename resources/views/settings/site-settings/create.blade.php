@@ -337,17 +337,36 @@
                                                                 data-placeholder="Select" required="required"
                                                                 id="currency">
                                                             <option></option>
-                                                            <option value="Rs" @selected(optional ($settings -> settings) -> currency === 'Rs')>
-                                                                Rs (PKR)
+                                                            <option value="$" @selected(optional($settings->settings)->currency === '$')>
+                                                                $ (USD)
                                                             </option>
-                                                            <option value="€" @selected(optional ($settings -> settings) -> currency === '€')>
+                                                            <option value="€" @selected(optional($settings->settings)->currency === '€')>
                                                                 € (EU)
                                                             </option>
-                                                            <option value="$" @selected(optional ($settings -> settings) -> currency === '$')>
-                                                                $ (USD)
+                                                            <option value="£" @selected(optional($settings->settings)->currency === '£')>
+                                                                £ (GBP)
+                                                            </option>
+                                                            <option value="SAR" @selected(optional($settings->settings)->currency === 'SAR')>
+                                                                SAR (ریال)
+                                                            </option>
+                                                            <option value="AED" @selected(optional($settings->settings)->currency === 'AED')>
+                                                                AED (درہم)
+                                                            </option>
+                                                            <option value="Rs" @selected(optional($settings->settings)->currency === 'Rs')>
+                                                                RS (PKR)
+                                                            </option>
+                                                            <option value="AUD" @selected(optional($settings->settings)->currency === 'AUD')>
+                                                                $ (AUD)
+                                                            </option>
+                                                            <option value="¥" @selected(optional($settings->settings)->currency === '¥')>
+                                                                ¥ (CYN)
+                                                            </option>
+                                                            <option value="INR" @selected(optional($settings->settings)->currency === 'INR')>
+                                                                RS (INR)
                                                             </option>
                                                         </select>
                                                     </div>
+                                                    
 
 
                                                   
