@@ -257,52 +257,57 @@
                               
                                       <!-- Banner Image -->
                                       <div class="col-md-12 mb-1">
-                                          <div class="border rounded p-2">
-                                              <div class="form-group">
-                                                  <label for="shop_banner_image">Banner Image</label>
-                                                  <input type="file" class="form-control-file" id="shop_banner_image" name="shop_banner_image"
-                                                      onchange="previewBannerImage(event)">
-                                                  
-                                                  <!-- Display the current image if available -->
-                                                  @if(!empty($settings->shop_banner_image))
-                                                      <div class="mt-2">
-                                                          <img src="{{ asset($settings->shop_banner_image) }}" alt="Shop Banner Image" class="img-fluid" style="max-width: 300px; max-height: 150px;">
-                                                      </div>
-                                                  @endif
-                                                  
-                                                  <!-- Preview for new image -->
-                                                  <div id="shop-banner-image-preview" class="mt-2"></div>
-                                              </div>
-                                          </div>
-                                      </div>
+                                        <div class="border rounded p-2">
+                                            <div class="form-group">
+                                                <label for="shop_banner_image">Banner Image</label>
+                                                <input type="file" class="form-control-file" id="shop_banner_image" name="shop_banner_image" onchange="previewBannerImage(event)">
+                                    
+                                                <!-- Display the current image if available -->
+                                                @if(!empty($settings->shop_banner_image))
+                                                    <div class="mt-2 current-banner-image">
+                                                        <img src="{{ asset($settings->shop_banner_image) }}" alt="Shop Banner Image" class="img-fluid" style="max-width: 300px; max-height: 150px;">
+                                                    </div>
+                                                @endif
+                                    
+                                                <!-- Preview for new image -->
+                                                <div id="shop-banner-image-preview" class="mt-2"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
                                   </div>
                               </div>
                               
                               <script>
-                                  function previewBannerImage(event) {
-                                      var file = event.target.files[0];
-                                      var previewContainer = document.getElementById('shop-banner-image-preview');
-                                  
-                                      // Clear previous previews
-                                      previewContainer.innerHTML = '';
-                                  
-                                      if (file) {
-                                          var reader = new FileReader();
-                                          
-                                          reader.onload = function(e) {
-                                              var img = document.createElement('img');
-                                              img.src = e.target.result;
-                                              img.alt = 'Preview';
-                                              img.className = 'img-fluid';
-                                              img.style.maxWidth = '300px';
-                                              img.style.maxHeight = '150px';
-                                              
-                                              previewContainer.appendChild(img);
-                                          };
-                                          
-                                          reader.readAsDataURL(file);
-                                      }
-                                  }
+                               function previewBannerImage(event) {
+                                    var file = event.target.files[0];
+                                    var previewContainer = document.getElementById('shop-banner-image-preview');
+                                    var currentImageContainer = document.querySelector('.current-banner-image');
+
+                                    // Clear previous previews and current image
+                                    previewContainer.innerHTML = '';
+                                    if (currentImageContainer) {
+                                        currentImageContainer.remove();
+                                    }
+
+                                    if (file) {
+                                        var reader = new FileReader();
+
+                                        reader.onload = function(e) {
+                                            var img = document.createElement('img');
+                                            img.src = e.target.result;
+                                            img.alt = 'Preview';
+                                            img.className = 'img-fluid';
+                                            img.style.maxWidth = '300px';
+                                            img.style.maxHeight = '150px';
+
+                                            previewContainer.appendChild(img);
+                                        };
+
+                                        reader.readAsDataURL(file);
+                                    }
+                                }
+
                               </script>
 
 
